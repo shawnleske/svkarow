@@ -1,3 +1,230 @@
 @import 'config';
 @import 'utilities';
 @import 'mobile';
+
+:root {
+    --abc: 
+        -3px -3px 5px rgba(255, 255, 255, 0.2),
+        4px 4px 5px rgba(0, 0, 0, 0.3),
+        inset 0px 0px 0px rgba(255, 255, 255, 0.1),
+        inset 0px 0px 0px rgba(0, 0, 0, 0.15);
+    --abc2: 
+        0px 0px 0px rgba(255, 255, 255, 0.2),
+        0px 0px 0px rgba(0, 0, 0, 0.3),
+        inset -4px -4px 10px rgba(255, 255, 255, 0.1),
+        inset 6px 6px 10px rgba(0, 0, 0, 0.15);
+    --box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.75);
+}
+
+body {
+    font-family: $font-stack;
+    width: 100vw;
+    height: 100vh;
+    font-size: 12px;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    position: fixed;
+    z-index: 3;
+    top: 0;
+    left: 0;
+    width: 100%;
+    box-shadow: var(--box-shadow);
+
+    > .header-topbar {
+        @include set-background($primary-color);
+        border-bottom: 2px $secondary-color solid;
+        display: grid;
+        grid-template-columns: 60px auto 50px;
+        grid-template-rows: 60px auto;
+        grid-template-areas: 
+            "logo club-name nav-button"
+            "nav nav nav";
+
+        > .logo {
+            grid-area: logo;
+            height: 50px;
+            width: 50px;
+            margin: 5px;
+        }
+        
+        > .club-name {
+            grid-area: club-name;
+            height: 60px;
+            line-height: 60px;
+            margin: 0;
+            text-shadow: 
+            1px 1px 0px $dark-neutral-color,
+            1px -1px 0px $dark-neutral-color,
+            -1px 1px 0px $dark-neutral-color,
+            -1px -1px 0px $dark-neutral-color;
+        }
+    
+        > .nav-button {
+            width: 30px;
+            height: 30px;
+            margin: 15px;
+            grid-area: nav-button;
+            @include set-background($primary-color);
+            box-shadow: var(--abc);
+            border-radius: 5px;
+            transition: all 0.25s;
+            cursor: pointer;
+            justify-self: end;
+    
+            &:hover {
+                box-shadow: var(--abc2);
+            }
+        }
+    }
+
+    > nav {
+        display: none;
+        grid-area: nav;
+        width: 100%;
+        top: 2px;
+        left: 0;
+
+        &.active {
+            display: block;
+        }
+
+        > ul {
+            display: block;
+            width: 100%;
+            width: 100%;
+            box-shadow: var(--box-shadow);
+
+            > li > a {
+                display: block;
+                height: 50px;
+                border-bottom: 2px $secondary-color solid;
+                @include set-background($primary-color, 0.85);
+                width: 100%;
+                line-height: 50px;
+                text-align: center;
+                text-decoration: none;
+                @include font-size(1);
+                color: $secondary-color;
+                font-weight: bold;
+                transition: background-color 0.5s, color 0.5s;
+                
+                &:hover {
+                    @include set-background($primary-color, 1);
+                }
+            }
+        }
+    }
+}
+
+main {
+    margin-top: 62px;
+    margin-bottom: 378px; //TODO: get footer height dynamically
+    min-height: 600px;
+    @include set-background($secondary-color);
+    box-shadow: var(--box-shadow);
+    position: relative;
+    z-index: 2;
+}
+
+footer {
+    position: fixed;
+    z-index: 1;
+    bottom: 0;
+    width: 100%;
+
+    > .sponsors {
+        width: 100%;
+        height: 90px;
+        background: url("../img/bg_sponsors.png") repeat;
+        box-shadow: inset 0px 0px 44px rgba(255, 255, 255, 0.11);
+
+        > .sponsors-container {
+            width: max-content;
+            margin: auto;
+            padding: 20px 0;
+
+            > a {
+                margin: 10px;
+
+                > img {
+                    filter: grayscale(100%);
+                    transition: filter 0.25s;
+
+                }
+
+                &:hover > img {
+                    filter: grayscale(0%);
+                }
+            }
+        }
+    }
+
+    > .footer-infos{
+        @include set-background(#1A1A1A);
+        box-shadow: inset 0px 0px 44px rgba(255, 255, 255, 0.28);
+        display: grid;
+        grid-template-columns: 1fr auto;
+        grid-template-rows: 10px auto 80px;
+        grid-template-areas: 
+            "spacer spacer"
+            "p map"
+            "menu menu";
+
+        &::before {
+            grid-area: spacer;
+            content: "";
+            display: block;
+            width: 100%;
+            height: 1px;
+            @include set-background(#717171);
+            box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.75);
+        }
+
+        > p {
+            grid-area: p;
+            font-weight: bold;
+            margin: 15px;
+            align-self: center;
+        }
+
+        > .maps {
+            grid-area: map;
+            justify-self: center;
+            align-self: center;
+            margin: 10px;
+        }
+
+        > .footer-menu {
+            width: 100%;
+            height: 30px;
+            grid-area: menu;
+            display: flex;
+            justify-content: center;
+            margin-top: 50px;
+
+            > li {
+                padding: 0 10px;
+                height: 30px;
+                line-height: 30px;
+                @include font-size(0.6);
+
+                > a {
+                    text-decoration: none;
+                    color: #666666;
+                    font-weight: bold;
+                    transition: color 0.25s;
+                    @include font-size(0.7);
+
+                    &:hover {
+                        color: $primary-color;
+                    }
+                }
+            }
+        }
+
+        
+    }
+}

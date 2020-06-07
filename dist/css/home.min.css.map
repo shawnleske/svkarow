@@ -1,0 +1,12 @@
+{
+    "version": 3,
+    "mappings": "AEOA,AAAA,EAAE,AAAC,CACC,MAAM,CAAE,CAAC,CACT,OAAO,CAAE,CAAC,CACV,UAAU,CAAE,IAAI,CACnB",
+    "sources": [
+        "../../scss/home.scss",
+        "../../scss/_config.scss",
+        "../../scss/_utilities.scss",
+        "../../scss/_mobile.scss"
+    ],
+    "names": [],
+    "file": "home.min.css"
+}
