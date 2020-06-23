@@ -3,6 +3,7 @@
 @import 'mobile';
 //SITES
 @import 'home';
+@import 'club';
 
 :root {
     --outset-neumorph: 
@@ -48,6 +49,12 @@ a.button {
     color: $primary-color;
     font-size: 1.1em;
     transition: color 0.25s, background-color 0.25s;
+
+    &.no-arrow {
+        > .button-arrow {
+            display: none;
+        }
+    }
 
     &:hover {
         background-color: $primary-color;
@@ -366,11 +373,3 @@ footer {
         }
     }
 }
-
-/* TODO:
-    Soccer ball: <div>Icons made by <a href="https://www.flaticon.com/free-icon/soccer-ball_2917153" title="Good Ware">Good Ware</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
-    Trainer man: Icons made by <a href="https://www.flaticon.com/free-icon/trainer_1558387" title="Good Ware">Good Ware</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a>
-    light bulb: <div>Icons made by <a href="https://www.flaticon.com/authors/good-ware" title="Good Ware">Good Ware</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
-    referee: <div>Icons made by <a href="https://www.flaticon.com/authors/good-ware" title="Good Ware">Good Ware</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
-    hands: <div>Icons made by <a href="https://www.flaticon.com/authors/good-ware" title="Good Ware">Good Ware</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
-*/

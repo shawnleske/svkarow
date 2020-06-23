@@ -1,0 +1,41 @@
+.club-container {
+    padding: 25px;
+
+    > .team {
+        margin-bottom: 75px;
+
+        &::after {
+            content: '';
+            display: block;
+            clear: both;
+            height: 0;
+        }
+
+        > .team-name {
+            border-radius: 5px;
+            background: $primary-color;
+            text-transform: uppercase;
+            box-shadow: var(--outset-neumorph);
+            font-weight: normal;
+            padding: 10px 0;
+            margin: 10px 0;
+        }
+
+        > img.team-photo {
+            border-radius: 5px;
+            width: 100%;
+            box-shadow: var(--outset-neumorph), var(--inset-neumorph);
+            margin-bottom: 10px;
+        }
+
+        > a.button {
+            &:first-of-type{
+                float: left;
+            }
+
+            &:last-of-type {
+                float: right;
+            }
+        }
+    }
+}

@@ -10,3 +10,11 @@ ul {
     padding: 0;
     list-style: none;
 }
+
+.marginizer::before {
+    clear: both;
+    content: "";
+    display: table;
+    margin-top: -1px;
+    height: 0;
+}

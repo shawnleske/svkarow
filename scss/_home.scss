@@ -132,10 +132,6 @@
                 color: $secondary-color;
                 margin: 0;
             }
-
-            > p {
-                
-            }
         }
     }
 }
@@ -145,11 +141,12 @@
     height: 2px;
     background: $secondary-color;
     box-shadow: var(--outset-neumorph);
-    margin-top: 25px;
+    margin: 25px 0;
 }
 
 .news-container {
     padding: 25px;
+    padding-top: 0px;
 
     > .news {
         box-shadow: var(--outset-neumorph);
@@ -189,14 +186,6 @@
         > .news-content {
             display: none;
             text-align: left;
-
-            &::before {
-                clear: both;
-                content: "";
-                display: table;
-                margin-top: -1px;
-                height: 0;
-            }
         }
     }
 }
