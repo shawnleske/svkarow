@@ -1,0 +1,202 @@
+@import 'config';
+@import 'utilities';
+@import 'mobile';
+
+.banner { //TODO: Banner Points
+    position: relative;
+    width: 100%;
+
+    &:hover {
+        > .banner-arrows {
+            opacity: 1;
+        }
+    }
+
+    > .image-container {
+        width: 100%;
+        position: relative;
+        height: 200px;
+        overflow: hidden;
+
+        > img {
+            position: absolute;
+            display: block;
+            width: 100%;
+            transition: left 0.5s;
+        }
+    }
+
+    > .banner-arrows {
+        position: absolute;
+        z-index: 2;
+        top: calc(50% - 15px);
+        height: 30px;
+        width: 100%;
+        opacity: 0;
+        transition: opacity 0.5s;
+        display: none;
+
+        &::after {
+            content: '';
+            display: block;
+            clear: both;
+        }
+
+        > .banner-arrow {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: $primary-color;
+            opacity: 0.5;
+            position: relative;
+            transition: opacity 0.5s;
+            cursor: pointer;
+
+            &:hover {
+                opacity: 1;
+            }
+
+            &::before, &::after {
+                content: '';
+                display: block;
+                position: absolute;
+                width: 15px;
+                height: 2px;
+                background-color: #FFF;
+                transform: rotateZ(-35deg);
+                top: 10px;
+                left: 6px;
+            }
+
+            &::after {
+                transform: rotateZ(35deg);
+                bottom: 10px;
+                top: auto;
+            }
+
+            &#banner-arrow-left {
+                float: left;
+                margin-left: 15px;
+            }
+
+            &#banner-arrow-right {
+                float: right;
+                margin-right: 15px;
+
+                &::before, &::after {
+                    transform: rotateZ(35deg);
+                    right: 6px;
+                    left: auto;
+                }
+    
+                &::after {
+                    transform: rotateZ(-35deg);
+                }
+            }
+        }
+    }
+}
+
+.ticker {
+    width: 100%;
+    height: 75px;
+    @include set-background($neutral-color);
+    border-bottom: 2px solid $secondary-color;
+    border-top: 2px solid $primary-color;
+}
+
+.home-container {
+    padding: 0 25px;
+
+    > h2 {
+        color: $neutral-color;
+        text-decoration: none;
+
+        > div {
+            color: $secondary-color;
+        }
+    }
+
+    > .home-boxes {
+        margin-top: 50px;
+        padding: 1px 0;
+        
+        > .home-box {
+            box-shadow: var(--inset-neumorph);
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+
+            > h3 {
+                font-weight: normal;
+                color: $secondary-color;
+                margin: 0;
+            }
+
+            > p {
+                
+            }
+        }
+    }
+}
+
+.main-spacer {
+    width: 100%;
+    height: 2px;
+    background: $secondary-color;
+    box-shadow: var(--outset-neumorph);
+    margin-top: 25px;
+}
+
+.news-container {
+    padding: 25px;
+
+    > .news {
+        box-shadow: var(--outset-neumorph);
+        border-radius: 5px;
+        overflow: hidden;
+        padding: 0 25px;
+        margin-bottom: 25px;
+        cursor: pointer;
+        transition: box-shadow 0.25s 0.25s;
+
+        &:hover {
+            > h3 {
+                color: $secondary-color;
+            }
+        }
+
+        &.open {
+            box-shadow: var(--inset-neumorph);
+            transition: box-shadow 0.25s;
+
+            > h3 {
+                color: $secondary-color;
+            }
+        }
+
+        > h3 {
+            text-transform: uppercase;
+            font-weight: normal;
+            transition: color 0.25s;
+        }
+
+        > .date {
+            font-size: 0.8em;
+            margin-top: 10px;
+        }
+
+        > .news-content {
+            display: none;
+            text-align: left;
+
+            &::before {
+                clear: both;
+                content: "";
+                display: table;
+                margin-top: -1px;
+                height: 0;
+            }
+        }
+    }
+}

@@ -1,6 +1,8 @@
 @import 'config';
 @import 'utilities';
 @import 'mobile';
+//SITES
+@import 'home';
 
 :root {
     --outset-neumorph: 
@@ -25,6 +27,94 @@ body {
     padding: 0;
 }
 
+h1, h2 {
+    color: $secondary-color;
+    text-decoration: underline;
+    text-transform: uppercase;
+}
+
+a {
+    text-decoration: none;
+    color: $secondary-color;
+}
+
+a.button {
+    display: inline-block;
+    background: $neutral-color;
+    box-shadow: var(--outset-neumorph);
+    border-radius: 5px;
+    padding: 15px 25px;
+    font-weight: bold;
+    color: $primary-color;
+    font-size: 1.1em;
+    transition: color 0.25s, background-color 0.25s;
+
+    &:hover {
+        background-color: $primary-color;
+        color: $neutral-color;
+
+        > .button-arrow {
+            background-color: $neutral-color;
+    
+            &::before {
+                background-color: $neutral-color;
+            }
+        
+            &::after {
+                background-color: $neutral-color;
+            }
+        }
+    }
+
+    &::after {
+        display: block;
+        content: '';
+        height: 0;
+        clear: both;
+    }
+
+    > .button-text {
+        float: left;
+    }
+
+    > .button-arrow {
+        float: right;
+        height: 2px;
+        width: 15px;
+        background: $primary-color;
+        position: relative;
+        top: 8px;
+        margin-left: 15px;
+        transition: background-color 0.25s;
+
+        &::before {
+            content: '';
+            display: block;
+            height: 2px;
+            width: 10px;
+            position: absolute;
+            background: $primary-color;
+            transform: rotateZ(35deg);
+            top: -3px;
+            left: 7px;
+            transition: background-color 0.25s;
+        }
+    
+        &::after {
+            content: '';
+            display: block;
+            height: 2px;
+            width: 10px;
+            position: absolute;
+            background: $primary-color;
+            transform: rotateZ(-35deg);
+            top: 3px;
+            left: 7px;
+            transition: background-color 0.25s;
+        }
+    }
+}
+
 header {
     position: fixed;
     z-index: 3;
@@ -32,16 +122,17 @@ header {
     left: 0;
     width: 100%;
     box-shadow: var(--box-shadow);
+    transition: height 0.25s; // TODO: get the animation to work
+    overflow: hidden;
 
     > .header-bar {
         @include set-background($primary-color);
         border-bottom: 2px $secondary-color solid;
         display: grid;
         grid-template-columns: 60px auto 50px;
-        grid-template-rows: 60px auto;
+        grid-template-rows: 60px;
         grid-template-areas: 
-            "logo club-name nav-button"
-            "nav nav nav";
+            "logo club-name nav-button";
 
         > .logo {
             grid-area: logo;
@@ -55,6 +146,8 @@ header {
             height: 60px;
             line-height: 60px;
             margin: 0;
+            color: $neutral-color;
+            text-decoration: none;
             text-shadow: 
             1px 1px 0px $dark-neutral-color,
             1px -1px 0px $dark-neutral-color,
@@ -74,7 +167,7 @@ header {
             cursor: pointer;
             justify-self: end;
     
-            &:hover {
+            &.open {
                 box-shadow: var(--inset-neumorph);
 
                 > .nav-button-icon {
@@ -126,36 +219,33 @@ header {
 
     > nav {
         display: none;
-        grid-area: nav;
         width: 100%;
         top: 2px;
         left: 0;
-
-        &.active {
-            display: block;
-        }
 
         > ul {
             display: block;
             width: 100%;
             width: 100%;
-            box-shadow: var(--box-shadow);
 
-            > li > a {
-                display: block;
-                height: 50px;
-                border-bottom: 2px $secondary-color solid;
-                @include set-background($primary-color, 0.85);
-                width: 100%;
-                line-height: 50px;
-                text-align: center;
-                text-decoration: none;
-                @include font-size(1);
-                color: $secondary-color;
-                font-weight: bold;
-                transition: background-color 0.5s, color 0.5s;
-                
-                &:hover {
+            > li {
+                > a {
+                    display: block;
+                    height: 50px;
+                    border-bottom: 2px $secondary-color solid;
+                    @include set-background($primary-color, 0.85);
+                    width: 100%;
+                    line-height: 50px;
+                    text-align: center;
+                    text-decoration: none;
+                    text-transform: uppercase;
+                    @include font-size(1);
+                    color: $secondary-color;
+                    font-weight: bold;
+                    transition: background-color 0.25s, color 0.25s;
+                }
+
+                &:hover > a, &.active > a{
                     @include set-background($primary-color, 1);
                 }
             }
@@ -165,12 +255,18 @@ header {
 
 main {
     margin-top: 62px;
-    margin-bottom: 378px; //TODO: get footer height dynamically
-    min-height: 600px;
-    @include set-background($secondary-color);
+    margin-bottom: 375px; //TODO: get footer height dynamically
     box-shadow: var(--box-shadow);
     position: relative;
     z-index: 2;
+
+    > .main-container { //TODO: add yellow left side
+        @include set-background($primary-color);
+        padding-top: 20px;
+        text-align: center;
+        font-size: 1.1em;
+        min-height: 600px;
+    }
 }
 
 footer {
@@ -268,7 +364,13 @@ footer {
                 }
             }
         }
-
-        
     }
 }
+
+/* TODO:
+    Soccer ball: <div>Icons made by <a href="https://www.flaticon.com/free-icon/soccer-ball_2917153" title="Good Ware">Good Ware</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
+    Trainer man: Icons made by <a href="https://www.flaticon.com/free-icon/trainer_1558387" title="Good Ware">Good Ware</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a>
+    light bulb: <div>Icons made by <a href="https://www.flaticon.com/authors/good-ware" title="Good Ware">Good Ware</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
+    referee: <div>Icons made by <a href="https://www.flaticon.com/authors/good-ware" title="Good Ware">Good Ware</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
+    hands: <div>Icons made by <a href="https://www.flaticon.com/authors/good-ware" title="Good Ware">Good Ware</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
+*/
