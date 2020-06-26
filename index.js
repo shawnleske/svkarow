@@ -20,6 +20,10 @@ router.get('/.netlify/functions/index', (req, res) => {
     });
 });
 
+app.get('/', (req, res) =>  {
+    res.render('home');
+});
+
 app.engine('handlebars', hbs.engine);
 app.set('view engine', 'handlebars');
 app.set('views', __dirname + '/dist/view');
