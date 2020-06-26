@@ -3,6 +3,15 @@ const handlebars = require('express-handlebars');
 const serverless = require('serverless-http');
 
 const app = express();
+const hbs = handlebars.create({
+    extname      :'handlebars',
+    layoutsDir   : 'dist/view/layouts',
+    defaultLayout: 'index',
+    helpers      : 'dist/view/helpers',
+    partialsDir  : [
+        'dist/view/partials'
+    ]
+});
 const router = express.Router();
 
 router.get('/', (req, res) => {
@@ -11,7 +20,30 @@ router.get('/', (req, res) => {
     });
 });
 
+app.engine('handlebars', hbs.engine);
+app.set('view engine', 'handlebars');
+app.set('views', __dirname + '/dist/view');
+app.use(express.static('dist'));
 app.use('/.netlify/functions/index', router);
+
+app.use(function(req, res){
+        res.status(404);
+    
+        // respond with html page
+        if (req.accepts('html')) {
+        res.render('404', { url: req.url });
+        return;
+        }
+    
+        // respond with json
+        if (req.accepts('json')) {
+        res.send({ error: 'Not found' });
+        return;
+        }
+    
+        // default to plain-text. send()
+        res.type('txt').send('Not found');
+    });
 
 module.exports.handler = serverless(app);
 // const hbs = handlebars.create({
