@@ -5,13 +5,17 @@
   "main": "index.js",
   "scripts": {
     "start": "node index",
-    "dev": "nodemon index"
+    "dev": "nodemon index",
+    "serve": "./node_modules/.bin/netlify-lambda serve .",
+    "build": "./node_modules/.bin/netlify-lambda build ."
   },
   "author": "Shawn Leske",
   "license": "ISC",
   "dependencies": {
     "express": "^4.17.1",
     "express-handlebars": "^4.0.4",
+    "netlify-lambda": "^1.6.3",
+    "serverless-http": "^2.5.0",
     "uuid": "^8.1.0"
   },
   "devDependencies": {
