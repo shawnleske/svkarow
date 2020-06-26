@@ -14,7 +14,7 @@ const hbs = handlebars.create({
 });
 const router = express.Router();
 
-router.get('/', (req, res) => {
+router.get('/.netlify/functions/index', (req, res) => {
     res.json({
         'hello': 'hi'
     });
@@ -24,7 +24,7 @@ app.engine('handlebars', hbs.engine);
 app.set('view engine', 'handlebars');
 app.set('views', __dirname + '/dist/view');
 app.use(express.static('dist'));
-app.use('/.netlify/functions/index', router);
+app.use('/', router);
 
 app.use(function(req, res){
         res.status(404);
