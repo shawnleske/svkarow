@@ -18,9 +18,7 @@ app.set('view engine', 'handlebars');
 app.set('views', __dirname + '/dist/view');
 app.use(express.static('dist'));
 
-console.log('OK');
 app.get('/', (req, res) =>  {
-    console.log('OK');
     res.render('home');
 });
 
