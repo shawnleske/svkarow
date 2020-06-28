@@ -39,6 +39,7 @@ function initMenu() {
         if(!$(e.target).is($navButton) && !$(e.target).closest($navButton).length && $nav.hasClass('active')) {
             $navButton.removeClass('open');
             $nav.removeClass('active');
+            $nav.slideUp(250);
         }
     });
 }
@@ -50,16 +51,20 @@ function initBanner() {
     var $imageContainer = $('.banner > .image-container');
 
     if(!$imageContainer.length)
-        return console.log('image container nicht gefunden');;
+        return console.log('image container nicht gefunden');
 
     $.ajax({
-        url : "/bannerimages",
-        success: data => {
-            let images = JSON.parse(data);
+        url : "/api/bannerimages",
+        success: images => {
+            
+            if(!images.length){
+                console.warn('Es konnten keine Bannerbilder gefunden werden!');
+                return;
+            }
 
             images.forEach((imageName, i) => {
                 if( imageName.match(/\.(jpe?g|png|gif)$/) ) { 
-                    $imageContainer.append( "<img src='./img/banner/"+ imageName +"' style=left:" + i*100 + "%; >" );
+                    $imageContainer.append( "<img src='/img/banner/"+ imageName +"' style=left:" + i*100 + "%; >" );
                 }
             });
 

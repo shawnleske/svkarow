@@ -1,6 +1,4 @@
 .container {
-    padding: 0 25px;
-
     > .team {
         margin-bottom: 75px;
 
@@ -24,7 +22,7 @@
         > img.team-photo {
             border-radius: 5px;
             width: 100%;
-            box-shadow: var(--outset-neumorph), var(--inset-neumorph);
+            box-shadow: var(--outset-neumorph);
             margin-bottom: 10px;
         }
 
@@ -35,6 +33,92 @@
 
             &:last-of-type {
                 float: right;
+            }
+        }
+    }
+}
+
+.team-container {
+    > .trainers {
+        justify-content: center;
+        overflow: hidden;
+        width: 100%; //TODO: add sideways scroll
+        margin-bottom: 50px;
+
+        > .trainers-container {
+            width: max-content;
+
+            > .trainer {
+                display: inline-block;
+                width: 175px;
+                margin: 0 10px;
+    
+                > img.trainer-pic {
+                    border-radius: 5px;
+                    width: 100%;
+                    box-shadow: var(--outset-neumorph);
+                }
+    
+                > .trainer-type {
+                    border-radius: 5px;
+                    background: $primary-color;
+                    text-transform: uppercase;
+                    box-shadow: var(--outset-neumorph);
+                    font-weight: normal;
+                    padding: 10px 0;
+                    margin: 10px 0;
+                }
+    
+                > .trainer-data {
+                    border-radius: 5px;
+                    background: $primary-color;
+                    box-shadow: var(--inset-neumorph);
+                    font-weight: normal;
+                    padding: 10px;
+                    margin: 10px 0;
+
+                    > .trainer-name {
+                        text-transform: uppercase;
+                        margin-bottom: 10px;
+                    }
+                }
+            }
+        }
+    }
+
+    > .training {
+        margin-bottom: 50px;
+
+        > h3 {
+            text-transform: uppercase;
+            text-decoration: underline;
+        }
+
+        > .day {
+            width: 70px;
+            display: inline-block;
+            margin: 0 10px;
+            vertical-align: top;
+
+            > .time {
+                width: 50px;
+                height: 50px;
+                border-radius: 5px;
+                background: $primary-color;
+                box-shadow: var(--outset-neumorph);
+                padding: 10px;
+                margin: 10px 0;
+                word-spacing: 9999rem;
+
+                &:empty {
+                    box-shadow: var(--inset-neumorph);
+                    background-image: linear-gradient( 45deg, 
+                        $primary-color 25%, $dark-neutral-color 25%, 
+                        $dark-neutral-color 50%, $primary-color 50%, 
+                        $primary-color 75%, $dark-neutral-color 75%, 
+                        $dark-neutral-color 100%);
+                    background-size: 20px 20px;
+                }
             }
         }
     }

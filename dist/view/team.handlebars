@@ -1,28 +1,72 @@
-<div class="container">
+<div class="team-container">
     <h2>1. Männer</h2>
     <div class="trainers">
-        <div class="trainer">
-            <div class="type">Trainer</div>
-            <img src="/dist/img/logo.png" alt="trainer" class="trainer-pic">
+        <div class="trainers-container">
+            <div class="trainer">
+                <img src="/img/trainer.jpg" alt="trainer" class="trainer-pic">
+                <div class="trainer-type">Trainer</div>
+                <div class="trainer-data">
+                    <div class="trainer-name">Nico Dürer</div>
+                    Tel.: 0173 9921914</br>
+                    E-Mail: nicoduerer@sv-karow-96.de
+                </div>
+            </div>
+            <div class="trainer">
+                <img src="/img/trainer.jpg" alt="trainer" class="trainer-pic">
+                <div class="trainer-type">Trainer</div>
+                <div class="trainer-data">
+                    <div class="trainer-name">Nico Dürer</div>
+                    Tel.: 0173 9921914</br>
+                    E-Mail: nicoduerer@sv-karow-96.de
+                </div>
+            </div>
+            <div class="trainer">
+                <img src="/img/trainer.jpg" alt="trainer" class="trainer-pic">
+                <div class="trainer-type">Trainer</div>
+                <div class="trainer-data">
+                    <div class="trainer-name">Nico Dürer</div>
+                    Tel.: 0173 9921914</br>
+                    E-Mail: nicoduerer@sv-karow-96.de
+                </div>
+            </div>
         </div>
     </div>
     <div class="training">
         <h3>Training</h3>
         <div class="location">Sportplatz Achillesstr. 79</div>
         <div class="day">
-            <h4>Montaq</h4>
-            <div class="time">19:30 - 21.30 Uhr</div>
+            <h4>Montag</h4>
+            <div class="time">19:30 - 21:30</div>
         </div>
+        <div class="day">
             <h4>Dienstag</h4>
-            <div class="time">19:30 - 21.30 Uhr</div>
+            <div class="time">19:30 - 21:30</div>
+        </div>
+        <div class="day">
+            <h4>Mittwoch</h4>
+            <div class="time"></div>
+        </div>
+        <div class="day">
+            <h4>Donnerstag</h4>
+            <div class="time"></div>
+        </div>
+        <div class="day">
+            <h4>Freitag</h4>
+            <div class="time">19:30 - 21:30</div>
         </div>
     </div>
     <div class="top-goalies">
-        <ul>
-            <li><span class="place">1.</span><span class="name">Sergej Walger</span><span class="goals">5</span></li>
-            <li><span class="place">2.</span><span class="name">Sebastian Schure</span><span class="goals">3</span></li>
-            <li><span class="place">3.</span><span class="name">Andreas Barth</span><span class="goals">2</span></li>
-        </ul>
+        <table>
+            <tbody>
+                {{#each scorerList}}
+                <tr>
+                    <td>{{place}}</td>
+                    <td>{{name}}</td>
+                    <td>{{goals}}</td>
+                </tr>
+                {{/each}}
+            </tbody>
+        </table>
     </div>
     <div class="games"></div>
     <div class="table"></div>

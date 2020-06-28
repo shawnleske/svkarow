@@ -147,46 +147,46 @@
 
 .news-container {
     padding: 25px;
-    padding-top: 0px;
+    padding-top: 0px; 
+}
 
-    > .news {
-        box-shadow: var(--outset-neumorph);
-        border-radius: 5px;
-        overflow: hidden;
-        padding: 0 25px;
-        margin-bottom: 25px;
-        cursor: pointer;
-        transition: box-shadow 0.25s 0.25s;
+.news {
+    box-shadow: var(--outset-neumorph);
+    border-radius: 5px;
+    overflow: hidden;
+    padding: 0 25px;
+    margin-bottom: 25px;
+    cursor: pointer;
+    transition: box-shadow 0.25s 0.25s;
 
-        &:hover {
-            > h3 {
-                color: $secondary-color;
-            }
+    &:hover {
+        > h3 {
+            color: $secondary-color;
         }
+    }
 
-        &.open {
-            box-shadow: var(--inset-neumorph);
-            transition: box-shadow 0.25s;
-
-            > h3 {
-                color: $secondary-color;
-            }
-        }
+    &.open {
+        box-shadow: var(--inset-neumorph);
+        transition: box-shadow 0.25s;
 
         > h3 {
-            text-transform: uppercase;
-            font-weight: normal;
-            transition: color 0.25s;
+            color: $secondary-color;
         }
+    }
 
-        > .date {
-            font-size: 0.8em;
-            margin-top: 10px;
-        }
+    > h3 {
+        text-transform: uppercase;
+        font-weight: normal;
+        transition: color 0.25s;
+    }
 
-        > .news-content {
-            display: none;
-            text-align: left;
-        }
+    > .date {
+        font-size: 0.8em;
+        margin-top: 10px;
+    }
+
+    > .news-content {
+        display: none;
+        text-align: left;
     }
 }

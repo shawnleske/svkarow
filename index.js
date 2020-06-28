@@ -1,5 +1,6 @@
 const express = require('express');
 const handlebars = require('express-handlebars');
+const fs = require('fs');
 
 const app = express();
 const hbs = handlebars.create({
@@ -36,16 +37,108 @@ app.get('/verein', (req, res) =>  {
 
 app.get('/team/:id', (req, res) =>  {
     var teamId = req.params.id;
-    console.log(teamId);
+    var scorerList = [
+        {
+            name: 'Sergej Walger',
+            goals: 5
+        },
+        {
+            name: 'Sebastian Schure',
+            goals: 4
+        },
+        {
+            name: 'Jonathan Reichardt',
+            goals: 1
+        },
+        {
+            name: 'Patrick Ifland',
+            goals: 1
+        },
+        {
+            name: 'Danny Mucha',
+            goals: 1
+        },
+        {
+            name: 'Andre Baalcke',
+            goals: 2
+        },
+        {
+            name: 'Andreas Barth',
+            goals: 3
+        },
+        {
+            name: 'Milan Moravac',
+            goals: 1
+        },
+        {
+            name: 'Christian Bachmann',
+            goals: 1
+        },
+        {
+            name: 'Max Zesch',
+            goals: 1
+        },
+        {
+            name: 'Daniel Neumann',
+            goals: 3
+        },
+        {
+            name: 'Nico Käding',
+            goals: 1
+        },
+        {
+            name: 'Hendrik Vogt',
+            goals: 2
+        },
+        {
+            name: 'Dennis Ziepel',
+            goals: 1
+        },
+    ];
 
-    res.render('team');
+    scorerList.sort((a, b) => {
+        if(a.goals > b.goals)
+            return -1;
+        else if(a.goals < b.goals)
+            return 1;
+        else
+            return 0;
+    });
+    
+    let lastElemGoals = 0;
+    let lastElemPlace = 1;
+    scorerList.forEach(scorer => {
+        if(lastElemGoals === 0){
+            lastElemGoals = scorer.goals;
+            scorer.place = lastElemPlace;
+        }
+        else if (lastElemGoals > scorer.goals){
+            lastElemGoals = scorer.goals;
+            scorer.place = ++lastElemPlace;
+        }
+        else {
+            scorer.place = '';
+        }
+    });
+
+    console.log(scorerList);
+
+    res.render('team', {scorerList: scorerList});
 });
 
 app.get('/kalender', (req, res) =>  {
     res.render('calendar');
 });
 
-app.use(function(req, res){
+app.get('/api/bannerimages', (req, res) =>  {
+    fs.readdir(__dirname + '/dist/img/banner', (err, files) => {
+        if (req.accepts('json')) {
+            res.send(files);
+        }
+    });
+});
+
+app.use((req, res) => {
     res.status(404);
 
     // respond with html page

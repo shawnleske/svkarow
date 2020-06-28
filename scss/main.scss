@@ -269,7 +269,7 @@ main {
 
     > .main-container { //TODO: add yellow left side
         @include set-background($primary-color);
-        padding-top: 20px;
+        padding: 20px 0;
         text-align: center;
         font-size: 1.1em;
         min-height: 600px;
