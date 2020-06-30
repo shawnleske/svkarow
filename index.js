@@ -105,23 +105,21 @@ app.get('/team/:id', (req, res) =>  {
             return 0;
     });
     
-    let lastElemGoals = 0;
-    let lastElemPlace = 1;
+    let prevGoals = 0;
+    let prevPlace = 1;
     scorerList.forEach(scorer => {
-        if(lastElemGoals === 0){
-            lastElemGoals = scorer.goals;
-            scorer.place = lastElemPlace;
+        if(prevGoals === 0){
+            prevGoals = scorer.goals;
+            scorer.place = prevPlace + '.';
         }
-        else if (lastElemGoals > scorer.goals){
-            lastElemGoals = scorer.goals;
-            scorer.place = ++lastElemPlace;
+        else if (prevGoals > scorer.goals){
+            prevGoals = scorer.goals;
+            scorer.place = ++prevPlace + '.';
         }
         else {
             scorer.place = '';
         }
     });
-
-    console.log(scorerList);
 
     res.render('team', {scorerList: scorerList});
 });
