@@ -39,11 +39,19 @@
 }
 
 .team-container {
+    > div {
+        margin-bottom: 50px;
+
+        > h3 {
+            text-transform: uppercase;
+            text-decoration: underline;
+        }
+    }
+
     > .trainers {
         justify-content: center;
         overflow: hidden;
         width: 100%; //TODO: add sideways scroll
-        margin-bottom: 50px;
 
         > .trainers-container {
             width: max-content;
@@ -87,13 +95,6 @@
     }
 
     > .training {
-        margin-bottom: 50px;
-
-        > h3 {
-            text-transform: uppercase;
-            text-decoration: underline;
-        }
-
         > .day {
             width: 70px;
             display: inline-block;
@@ -121,5 +122,49 @@
                 }
             }
         }
+    }
+
+    > .top-goalies {
+        > table {
+            margin: auto;
+            border-spacing: 0;
+            text-align: left;
+
+            > tbody {
+                box-shadow: var(--outset-neumorph);
+                border-radius: 5px;
+
+                > tr {
+                    &:nth-child(even) {
+                        > td {
+                            background: $neutral-color;
+                            color: $primary-color;
+                        }
+                    }
+
+                    &:nth-child(odd) {
+                        > td {
+                            background: $primary-color;
+                            color: $neutral-color;
+                        }
+                    }
+
+                    &:first-child td:first-child { border-top-left-radius: 5px; }
+                    &:first-child td:last-child { border-top-right-radius: 5px; }
+                    &:last-child td:first-child { border-bottom-left-radius: 5px; }
+                    &:last-child td:last-child { border-bottom-right-radius: 5px; }
+
+                    > td {
+                        padding: 5px 10px;
+                        margin: 0;
+                    }
+                }
+            }
+        }
+    }
+
+    > .games-table-widget > #widget {
+        overflow: auto;
+        margin: 0 25px;
     }
 }

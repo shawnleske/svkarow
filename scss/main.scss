@@ -136,30 +136,37 @@ header {
         @include set-background($primary-color);
         border-bottom: 2px $secondary-color solid;
         display: grid;
-        grid-template-columns: 60px auto 50px;
+        grid-template-columns: max-content auto 50px;
         grid-template-rows: 60px;
-        grid-template-areas: 
-            "logo club-name nav-button";
+        grid-template-areas: "a . nav-button";
 
-        > .logo {
-            grid-area: logo;
-            height: 50px;
-            width: 50px;
-            margin: 5px;
-        }
-        
-        > .club-name {
-            grid-area: club-name;
-            height: 60px;
-            line-height: 60px;
-            margin: 0;
-            color: $neutral-color;
-            text-decoration: none;
-            text-shadow: 
-            1px 1px 0px $dark-neutral-color,
-            1px -1px 0px $dark-neutral-color,
-            -1px 1px 0px $dark-neutral-color,
-            -1px -1px 0px $dark-neutral-color;
+        > a {
+            grid-area: a;
+            display: grid;
+            grid-template-columns: 60px max-content;
+            grid-template-rows: 60px;
+            grid-template-areas: "logo club-name";
+
+            > .logo {
+                grid-area: logo;
+                height: 50px;
+                width: 50px;
+                margin: 5px;
+            }
+            
+            > .club-name {
+                grid-area: club-name;
+                height: 60px;
+                line-height: 60px;
+                margin: 0;
+                color: $neutral-color;
+                text-decoration: none;
+                text-shadow: 
+                1px 1px 0px $dark-neutral-color,
+                1px -1px 0px $dark-neutral-color,
+                -1px 1px 0px $dark-neutral-color,
+                -1px -1px 0px $dark-neutral-color;
+            }
         }
     
         > .nav-button {

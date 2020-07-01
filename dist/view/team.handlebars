@@ -2,6 +2,7 @@
     <h2>1. Männer</h2>
     <div class="trainers">
         <div class="trainers-container">
+            <!-- TODO: add carousel -->
             <div class="trainer">
                 <img src="/img/trainer.jpg" alt="trainer" class="trainer-pic">
                 <div class="trainer-type">Trainer</div>
@@ -56,6 +57,7 @@
         </div>
     </div>
     <div class="top-goalies">
+        <h3>Torschützenliste</h3>
         <table>
             <tbody>
                 {{#each scorerList}}
@@ -69,6 +71,7 @@
         </table>
     </div>
     <div class="games-table-widget">
+        <h3>Tabelle + Spiele</h3>
         <div id="widget"></div>
 	    <script type="text/javascript">
 		    new fussballdeWidgetAPI().showWidget('widget', '02B9OLEEMC000000VUM1DNPHVVV7DK6U');

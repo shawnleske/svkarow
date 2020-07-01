@@ -1,140 +1,18 @@
 const express = require('express');
-const handlebars = require('express-handlebars');
-const fs = require('fs');
+const path = require('path');
+const hbs = require('./handlebars');
 
 const app = express();
-const hbs = handlebars.create({
-    extname      :'handlebars',
-    layoutsDir   : 'dist/view/layouts',
-    defaultLayout: 'index',
-    helpers      : 'dist/view/helpers',
-    partialsDir  : [
-        'dist/view/partials'
-    ]
-});
 const PORT = process.env.PORT || 5000;
 
 app.engine('handlebars', hbs.engine);
+
 app.set('view engine', 'handlebars');
-app.set('views', __dirname + '/dist/view');
-app.use(express.static('dist'));
+app.set('views', path.join(__dirname, 'dist', 'view'));
 
-app.get('/', (req, res) =>  {
-    res.render('home');
-});
-
-app.get('/home', (req, res) =>  {
-    res.render('home');
-});
-
-app.get('/news', (req, res) =>  {
-    res.render('news');
-});
-
-app.get('/verein', (req, res) =>  {
-    res.render('verein');
-});
-
-app.get('/team/:id', (req, res) =>  {
-    var teamId = req.params.id;
-    var scorerList = [
-        {
-            name: 'Sergej Walger',
-            goals: 5
-        },
-        {
-            name: 'Sebastian Schure',
-            goals: 4
-        },
-        {
-            name: 'Jonathan Reichardt',
-            goals: 1
-        },
-        {
-            name: 'Patrick Ifland',
-            goals: 1
-        },
-        {
-            name: 'Danny Mucha',
-            goals: 1
-        },
-        {
-            name: 'Andre Baalcke',
-            goals: 2
-        },
-        {
-            name: 'Andreas Barth',
-            goals: 3
-        },
-        {
-            name: 'Milan Moravac',
-            goals: 1
-        },
-        {
-            name: 'Christian Bachmann',
-            goals: 1
-        },
-        {
-            name: 'Max Zesch',
-            goals: 1
-        },
-        {
-            name: 'Daniel Neumann',
-            goals: 3
-        },
-        {
-            name: 'Nico Käding',
-            goals: 1
-        },
-        {
-            name: 'Hendrik Vogt',
-            goals: 2
-        },
-        {
-            name: 'Dennis Ziepel',
-            goals: 1
-        },
-    ];
-
-    scorerList.sort((a, b) => {
-        if(a.goals > b.goals)
-            return -1;
-        else if(a.goals < b.goals)
-            return 1;
-        else
-            return 0;
-    });
-    
-    let prevGoals = 0;
-    let prevPlace = 1;
-    scorerList.forEach(scorer => {
-        if(prevGoals === 0){
-            prevGoals = scorer.goals;
-            scorer.place = prevPlace + '.';
-        }
-        else if (prevGoals > scorer.goals){
-            prevGoals = scorer.goals;
-            scorer.place = ++prevPlace + '.';
-        }
-        else {
-            scorer.place = '';
-        }
-    });
-
-    res.render('team', {scorerList: scorerList});
-});
-
-app.get('/kalender', (req, res) =>  {
-    res.render('calendar');
-});
-
-app.get('/api/bannerimages', (req, res) =>  {
-    fs.readdir(__dirname + '/dist/img/banner', (err, files) => {
-        if (req.accepts('json')) {
-            res.send(files);
-        }
-    });
-});
+app.use(express.static(path.join(__dirname, 'dist')));
+app.use('/api/bannerimages', require('./routes/api/banner')); //TODO: replace api with server side rendering (load banner as variable in index.handlebars)
+app.use('/', require('./routes/routes'));
 
 app.use((req, res) => {
     res.status(404);
