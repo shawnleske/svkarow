@@ -5,10 +5,12 @@ router.get('/', (req, res) => res.render('home'));
 router.get('/home', (req, res) => res.render('home'));
 router.get('/news', (req, res) => res.render('news'));
 router.get('/verein', (req, res) => res.render('verein'));
-router.get('/kalender', (req, res) => res.render('calendar'));
+router.get('/shop', (req, res) => res.render('shop'));
+router.get('/galerie', (req, res) => res.render('gallery'));
+router.get('/kleiderboerse', (req, res) => res.render('boerse'));
 
 router.get('/team/:id', (req, res) =>  {
-    var teamId = req.params.id;
+    var teamId = req.params.id; //TODO: scorerlist to mongodb
     var scorerList = [
         {
             name: 'Sergej Walger',

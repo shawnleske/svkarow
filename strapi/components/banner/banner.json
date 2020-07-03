@@ -1,0 +1,21 @@
+{
+  "collectionName": "components_banner_banners",
+  "info": {
+    "name": "Banner",
+    "icon": "binoculars"
+  },
+  "options": {},
+  "attributes": {
+    "Bannerpic": {
+      "collection": "file",
+      "via": "related",
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos"
+      ],
+      "plugin": "upload",
+      "required": false
+    }
+  }
+}

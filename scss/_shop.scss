@@ -1,0 +1,111 @@
+.container {
+    > img.online-shop-photo {
+        border-radius: 5px;
+        width: 100%;
+        box-shadow: var(--outset-neumorph);
+        margin-bottom: 10px;
+    }
+
+    > .clothing-stock-desc {
+        padding: 10px 25px;
+        border-radius: 5px;
+        background: $primary-color;
+        box-shadow: var(--inset-neumorph);
+        font-size: 0.9em;
+    }
+
+    > .fan-shop-container {
+        margin-top: 50px;
+
+        > p {
+            font-weight: bold;
+            color: $secondary-color;
+        }
+
+        > .fan-shop-entry {
+            &:first-of-type::before {
+                display: none;
+            }
+
+            &::before {
+                content: "";
+                display: block;
+                height: 1px;
+                background: $secondary-color;
+                box-shadow: var(--outset-neumorph), var(--outset-neumorph), var(--outset-neumorph);
+                margin: 25px 0;
+                width: 100%;
+            }
+
+            > .image-container {
+                &::after {
+                    content: "";
+                    height: 0px;
+                    clear: both;
+                    display: block;
+                }
+
+                > img {
+                    border-radius: 5px;
+                    width: calc(50% - 10px);
+                    margin: 0;
+                    box-shadow: var(--outset-neumorph);
+                    margin-top: 20px;
+
+                    &:nth-child(odd) {
+                        float: left;
+                    }
+
+                    &:nth-child(even) {
+                        float: right;
+                    }
+
+                    &:nth-child(1), &:nth-child(2) {
+                        margin-top: 0;
+                    }
+                }
+            }
+    
+            > .title {
+                border-radius: 5px;
+                background: $primary-color;
+                text-transform: uppercase;
+                box-shadow: var(--outset-neumorph);
+                font-weight: normal;
+                padding: 10px 0;
+                margin: 20px 0 0 0;
+            }
+
+            > .row {
+                &::after {
+                    content: "";
+                    height: 0px;
+                    clear: both;
+                    display: block;
+                }
+
+                > .price {
+                    border-radius: 5px;
+                    background: $primary-color;
+                    box-shadow: var(--outset-neumorph);
+                    font-weight: normal;
+                    padding: 10px 0;
+                    margin: 20px 0 0 0;
+                    width: calc(50% - 10px);
+                    float: right;
+                    font-size: 1.7em;
+                    padding: 5px 0;
+                    font-weight: bold;
+                }
+            }
+
+            > .desc {
+                padding: 10px 25px;
+                border-radius: 5px;
+                background: $primary-color;
+                box-shadow: var(--inset-neumorph);
+                margin-top: 20px;
+            }
+        }
+    }
+}

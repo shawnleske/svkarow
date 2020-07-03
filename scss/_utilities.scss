@@ -11,12 +11,14 @@ ul {
     list-style: none;
 }
 
-.marginizer::before {
-    clear: both;
-    content: "";
-    display: table;
-    margin-top: -1px;
-    height: 0;
+.marginizer {
+    &::before, &::after {
+        clear: both;
+        content: "";
+        display: table;
+        margin-bottom: -1px;
+        height: 0; 
+    }
 }
 
 .container {
