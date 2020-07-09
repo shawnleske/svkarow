@@ -1,9 +1,13 @@
-.container {
+.shop-container {
     > img.online-shop-photo {
         border-radius: 5px;
         width: 100%;
         box-shadow: var(--outset-neumorph);
         margin-bottom: 10px;
+        max-width: 350px;
+        display: block;
+        margin: auto;
+        margin-bottom: 25px;
     }
 
     > .clothing-stock-desc {
@@ -14,28 +18,26 @@
         font-size: 0.9em;
     }
 
+    > h3 {
+        margin-top: 50px;
+    }
+
+    > p {
+        font-weight: bold;
+        color: $secondary-color;
+        margin-bottom: 50px;
+    }
+
     > .fan-shop-container {
         margin-top: 50px;
-
-        > p {
-            font-weight: bold;
-            color: $secondary-color;
-        }
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
 
         > .fan-shop-entry {
-            &:first-of-type::before {
-                display: none;
-            }
-
-            &::before {
-                content: "";
-                display: block;
-                height: 1px;
-                background: $secondary-color;
-                box-shadow: var(--outset-neumorph), var(--outset-neumorph), var(--outset-neumorph);
-                margin: 25px 0;
-                width: 100%;
-            }
+            max-width: 350px;
+            margin: 0 25px;
+            margin-bottom: 50px;
 
             > .image-container {
                 &::after {

@@ -1,3 +1,65 @@
-// @media(min-width: 700px) {
-//   // DO STUFF
-// }
+@media(min-width: 370px) {
+    .container {
+        > .team-container {
+            > .team {
+                > a.button {
+                    > .button-arrow {
+                        display: block;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media(min-width: 700px) {
+    .container {
+        > .team-container {
+            > .team {
+                margin-left: 10px;
+                margin-right: 10px;
+            }
+        }
+    }
+}
+
+@media(min-width: 480px) {
+    main {
+        margin-bottom: 419px; //TODO: get footer height dynamically
+    }
+
+    footer {
+        > .footer-infos{
+            > .footer-infos-top {
+                display: flex;
+                justify-content: space-evenly;
+            }
+        }
+    }
+}
+
+@media(min-width: 520px) {
+    .home-boxes {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+
+        > .home-box {
+            max-width: 40%;
+        }
+    }
+}
+
+@media(min-width: 1100px) {
+    .home-boxes {
+        display: flex;
+        width: max-content;
+        margin: auto;
+
+        > .home-box {
+            max-width: 200px;
+            margin-left: 10px;
+            margin-right: 10px;
+        }
+    }
+}

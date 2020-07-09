@@ -8,7 +8,7 @@ router.get('/', (req, res) =>  {
         if (req.accepts('json')) {
             res.send(files);
         }
-    });
+    });//TODO: add to strapi api
 });
 
 module.exports = router;

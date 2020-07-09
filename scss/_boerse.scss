@@ -1,21 +1,19 @@
 .container {
+    > .clothing-stock-desc {
+        max-width: 350px;
+        margin: auto;
+    }
+
     > .sell-container {
         margin-top: 50px;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
 
         > .sell-entry {
-            &:first-of-type::before {
-                display: none;
-            }
-
-            &::before {
-                content: "";
-                display: block;
-                height: 1px;
-                background: $secondary-color;
-                box-shadow: var(--outset-neumorph), var(--outset-neumorph), var(--outset-neumorph);
-                margin: 25px 0;
-                width: 100%;
-            }
+            max-width: 350px;
+            margin: 0 25px;
+            margin-bottom: 50px;
 
             > .image-container {
                 &::after {
@@ -97,22 +95,15 @@
     
     > .buy-container {
         margin-top: 50px;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
 
         > .buy-entry {
-            &:first-of-type::before {
-                display: none;
-            }
+            max-width: 350px;
+            margin: 0 25px;
+            margin-bottom: 50px;
 
-            &::before {
-                content: "";
-                display: block;
-                height: 1px;
-                background: $secondary-color;
-                box-shadow: var(--outset-neumorph), var(--outset-neumorph), var(--outset-neumorph);
-                margin: 25px 0;
-                width: 100%;
-            }
-    
             > .title {
                 border-radius: 5px;
                 background: $primary-color;
