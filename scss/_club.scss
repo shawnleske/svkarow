@@ -10,6 +10,7 @@
             display: inline-block;
             width: 175px;
             margin: 0 10px;
+            vertical-align: top;
 
             > img.official-pic {
                 border-radius: 5px;
@@ -51,6 +52,7 @@
             display: inline-block;
             width: 175px;
             margin: 0 10px;
+            vertical-align: top;
 
             > img.referee-pic {
                 border-radius: 5px;
@@ -112,7 +114,7 @@
                 margin: 10px 0;
             }
     
-            > img.team-photo {
+            > img.team-pic {
                 border-radius: 5px;
                 width: 100%;
                 box-shadow: var(--outset-neumorph);
@@ -154,6 +156,7 @@
             display: inline-block;
             width: 175px;
             margin: 0 10px;
+            vertical-align: top;
 
             > img.trainer-pic {
                 border-radius: 5px;

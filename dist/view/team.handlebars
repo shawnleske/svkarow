@@ -1,34 +1,25 @@
 <div class="team-container container">
-    <h2>1. Männer</h2>
+    <h2>{{data.Name}}</h2>
     <div class="trainers">
         <div class="trainers-container carousel">
+            {{#each data.Trainers}}
             <div class="trainer">
-                <img src="/img/trainer.jpg" alt="trainer" class="trainer-pic">
-                <div class="trainer-type">Trainer</div>
+                {{#if Foto}}
+                <img src="{{../apiUrl}}{{Foto.url}}" alt="{{Foto.alternativeText}}" class="trainer-pic">
+                {{else}}
+                <img src="/img/placeholder.jpg" alt="Trainer Platzhalter" class="trainer-pic">
+                {{/if}}
+                <div class="trainer-type">{{Sorte}}</div>
                 <div class="trainer-data">
-                    <div class="trainer-name">Nico Dürer</div>
-                    Tel.: 0173 9921914</br>
-                    E-Mail: nicoduerer@sv-karow-96.de
+                    <div class="trainer-name">{{Name}}</div>
+                    {{#if Tel}}Tel.: {{Tel}}<br>{{/if}}
+                    {{#if Email}}E-Mail: <a href="mailto:{{Email}}">{{Email}}</a><br>{{/if}}
                 </div>
             </div>
-            <div class="trainer">
-                <img src="/img/trainer.jpg" alt="trainer" class="trainer-pic">
-                <div class="trainer-type">Trainer</div>
-                <div class="trainer-data">
-                    <div class="trainer-name">Nico Dürer</div>
-                    Tel.: 0173 9921914</br>
-                    E-Mail: nicoduerer@sv-karow-96.de
-                </div>
-            </div>
-            <div class="trainer">
-                <img src="/img/trainer.jpg" alt="trainer" class="trainer-pic">
-                <div class="trainer-type">Trainer</div>
-                <div class="trainer-data">
-                    <div class="trainer-name">Nico Dürer</div>
-                    Tel.: 0173 9921914</br>
-                    E-Mail: nicoduerer@sv-karow-96.de
-                </div>
-            </div>
+            {{/each}}
+            {{#unless teams}}
+            <!-- TODO: Default when no entries -->
+            {{/unless}}
         </div>
     </div>
     <div class="training">
@@ -36,30 +27,31 @@
         <div class="location">Sportplatz Achillesstr. 79</div>
         <div class="day">
             <h4>Montag</h4>
-            <div class="time">19:30 - 21:30</div>
+            <div class="time">{{data.Trainingszeiten.mo}}</div>
         </div>
         <div class="day">
             <h4>Dienstag</h4>
-            <div class="time">19:30 - 21:30</div>
+            <div class="time">{{data.Trainingszeiten.di}}</div>
         </div>
         <div class="day">
             <h4>Mittwoch</h4>
-            <div class="time"></div>
+            <div class="time">{{data.Trainingszeiten.mi}}</div>
         </div>
         <div class="day">
             <h4>Donnerstag</h4>
-            <div class="time"></div>
+            <div class="time">{{data.Trainingszeiten.do}}</div>
         </div>
         <div class="day">
             <h4>Freitag</h4>
-            <div class="time">19:30 - 21:30</div>
+            <div class="time">{{data.Trainingszeiten.fr}}</div>
         </div>
     </div>
+    {{#if data.Torschuetzen}}
     <div class="top-goalies">
         <h3>Torschützenliste</h3>
         <table>
             <tbody>
-                {{#each scorerList}}
+                {{#each data.Torschuetzen}}
                 <tr>
                     <td>{{place}}</td>
                     <td>{{name}}</td>
@@ -69,9 +61,11 @@
             </tbody>
         </table>
     </div>
+    {{/if}}
     <div class="games-table-widget">
         <h3>Tabelle + Spiele</h3>
         <div id="widget"></div>
+        <!-- TODO: replace widget with html of data obj -->
 	    <script type="text/javascript">
 		    new fussballdeWidgetAPI().showWidget('widget', '02B9OLEEMC000000VUM1DNPHVVV7DK6U');
 	    </script>

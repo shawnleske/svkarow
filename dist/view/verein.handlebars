@@ -3,105 +3,48 @@
     <h3>Vorstand / Funktionäre</h3>
     <div class="officials">
         <div class="officials-container carousel">
+            {{#each officials}}
             <div class="official">
-                <img src="/img/trainer.jpg" alt="official" class="official-pic">
-                <div class="official-type">1.Vorsitzender</div>
+                {{#if Foto}}
+                <img src="{{../apiUrl}}{{Foto.url}}" alt="{{Foto.alternativeText}}" class="official-pic">
+                {{else}}
+                <img src="/img/placeholder.jpg" alt="Funkionär Platzhalter" class="official-pic">
+                {{/if}}
+                <div class="official-type">{{Funktion}}</div>
                 <div class="official-data">
-                    <div class="official-name">Jan Godglück</div>
-                    Tel.: 0176 57697094
-                    E-Mail: vorstand@sv-karow-96.de
-                    Fax: 032122515955
+                    <div class="official-name">{{Name}}</div>
+                    {{#if Tel}}Tel.: {{Tel}}<br>{{/if}}
+                    {{#if Email}}E-Mail: <a href="mailto:{{Email}}">{{Email}}</a><br>{{/if}}
+                    {{#if Fax}}Fax: {{Fax}}{{/if}}
                 </div>
             </div>
-            <div class="official">
-                <img src="/img/trainer.jpg" alt="official" class="official-pic">
-                <div class="official-type">1.Vorsitzender</div>
-                <div class="official-data">
-                    <div class="official-name">Jan Godglück</div>
-                    Tel.: 0176 57697094
-                    E-Mail: vorstand@sv-karow-96.de
-                    Fax: 032122515955
-                </div>
-            </div>
-            <div class="official">
-                <img src="/img/trainer.jpg" alt="official" class="official-pic">
-                <div class="official-type">1.Vorsitzender</div>
-                <div class="official-data">
-                    <div class="official-name">Jan Godglück</div>
-                    Tel.: 0176 57697094
-                    E-Mail: vorstand@sv-karow-96.de
-                    Fax: 032122515955
-                </div>
-            </div>
-            <div class="official">
-                <img src="/img/trainer.jpg" alt="official" class="official-pic">
-                <div class="official-type">1.Vorsitzender</div>
-                <div class="official-data">
-                    <div class="official-name">Jan Godglück</div>
-                    Tel.: 0176 57697094
-                    E-Mail: vorstand@sv-karow-96.de
-                    Fax: 032122515955
-                </div>
-            </div>
-            <div class="official">
-                <img src="/img/trainer.jpg" alt="official" class="official-pic">
-                <div class="official-type">1.Vorsitzender</div>
-                <div class="official-data">
-                    <div class="official-name">Jan Godglück</div>
-                    Tel.: 0176 57697094
-                    E-Mail: vorstand@sv-karow-96.de
-                    Fax: 032122515955
-                </div>
-            </div>
-            <div class="official">
-                <img src="/img/trainer.jpg" alt="official" class="official-pic">
-                <div class="official-type">1.Vorsitzender</div>
-                <div class="official-data">
-                    <div class="official-name">Jan Godglück</div>
-                    Tel.: 0176 57697094
-                    E-Mail: vorstand@sv-karow-96.de
-                    Fax: 032122515955
-                </div>
-            </div>
-            <div class="official">
-                <img src="/img/trainer.jpg" alt="official" class="official-pic">
-                <div class="official-type">1.Vorsitzender</div>
-                <div class="official-data">
-                    <div class="official-name">Jan Godglück</div>
-                    Tel.: 0176 57697094
-                    E-Mail: vorstand@sv-karow-96.de
-                    Fax: 032122515955
-                </div>
-            </div>
-            <div class="official">
-                <img src="/img/trainer.jpg" alt="official" class="official-pic">
-                <div class="official-type">1.Vorsitzender</div>
-                <div class="official-data">
-                    <div class="official-name">Jan Godglück</div>
-                    Tel.: 0176 57697094
-                    E-Mail: vorstand@sv-karow-96.de
-                    Fax: 032122515955
-                </div>
-            </div>
+            {{/each}}
+            {{#unless officials}}
+            <!-- TODO: Default when no entries -->
+            {{/unless}}
         </div>
     </div>
     <h3>Schiedsrichter</h3>
     <div class="referees">
         <div class="referees-container carousel">
+            {{#each referees}}
             <div class="referee">
-                <img src="/img/placeholder.jpg" alt="schiedsrichter" class="referee-pic">
-                <div class="referee-name">Ewelina Kolodziejczyk, 31</div>
+                {{#if Foto}}
+                <img src="{{../apiUrl}}{{Foto.url}}" alt="{{Foto.alternativeText}}" class="referee-pic">
+                {{else}}
+                <img src="/img/placeholder.jpg" alt="Schiedsrichter Platzhalter" class="referee-pic">
+                {{/if}}
+                <div class="referee-name">{{Name}}, {{Alter}}</div>
+                {{#if Info}}
                 <div class="referee-data">
-                    Im Verein seit 01.01.2015
+                    {{Info}}
                 </div>
+                {{/if}}
             </div>
-            <div class="referee">
-                <img src="/img/placeholder.jpg" alt="schiedsrichter" class="referee-pic">
-                <div class="referee-name">Marvin Rjosk, 15</div>
-                <div class="referee-data">
-                    Im Verein seit 01.02.2013
-                </div>
-            </div>
+            {{/each}}
+            {{#unless referees}}
+            <!-- TODO: Default when no entries -->
+            {{/unless}}
         </div>
     </div>
     <!-- TODO: change all buttons to just a tag (button text between a-tags and arrow as ::after) -->
@@ -111,10 +54,15 @@
     </a>
     <h3>Mannschaften</h3>
     <div class="team-container">
+        {{#each teams}}
         <div class="team">
-            <h3 class="team-name">1.Herren</h3>
-            <img class="team-photo" src="./img/team.jpg" alt="1.Herren Mannschaftsfoto">
-            <a href="/team/6" class="button">
+            <h3 class="team-name">{{Name}}</h3>
+            {{#if Foto}}
+            <img src="{{../apiUrl}}{{Foto.url}}" alt="{{Foto.alternativeText}}" class="team-pic">
+            {{else}}
+            <img src="/img/placeholder_team.jpg" alt="Team Platzhalter" class="team-pic">
+            {{/if}}
+            <a href="/team/{{_id}}" class="button">
                 <div class="button-text">Zum Team</div>
                 <div class="button-arrow"></div>
             </a>
@@ -123,53 +71,9 @@
                 <div class="button-arrow"></div>
             </a>
         </div>
-        <div class="team">
-            <h3 class="team-name">1.Herren</h3>
-            <img class="team-photo" src="./img/team.jpg" alt="1.Herren Mannschaftsfoto">
-            <a href="/team/6" class="button">
-                <div class="button-text">Zum Team</div>
-                <div class="button-arrow"></div>
-            </a>
-            <a href="/kalendar/team/6" class="button">
-                <div class="button-text">Zum Spielplan</div>
-                <div class="button-arrow"></div>
-            </a>
-        </div>
-        <div class="team">
-            <h3 class="team-name">1.Herren</h3>
-            <img class="team-photo" src="./img/team.jpg" alt="1.Herren Mannschaftsfoto">
-            <a href="/team/6" class="button">
-                <div class="button-text">Zum Team</div>
-                <div class="button-arrow"></div>
-            </a>
-            <a href="/kalendar/team/6" class="button">
-                <div class="button-text">Zum Spielplan</div>
-                <div class="button-arrow"></div>
-            </a>
-        </div>
-        <div class="team">
-            <h3 class="team-name">1.Herren</h3>
-            <img class="team-photo" src="./img/team.jpg" alt="1.Herren Mannschaftsfoto">
-            <a href="/team/6" class="button">
-                <div class="button-text">Zum Team</div>
-                <div class="button-arrow"></div>
-            </a>
-            <a href="/kalendar/team/6" class="button">
-                <div class="button-text">Zum Spielplan</div>
-                <div class="button-arrow"></div>
-            </a>
-        </div>
-        <div class="team">
-            <h3 class="team-name">1.Herren</h3>
-            <img class="team-photo" src="./img/team.jpg" alt="1.Herren Mannschaftsfoto">
-            <a href="/team/6" class="button">
-                <div class="button-text">Zum Team</div>
-                <div class="button-arrow"></div>
-            </a>
-            <a href="/kalendar/team/6" class="button">
-                <div class="button-text">Zum Spielplan</div>
-                <div class="button-arrow"></div>
-            </a>
-        </div>
+        {{/each}}
+        {{#unless teams}}
+        <!-- TODO: Default when no entries -->
+        {{/unless}}
     </div>
 </div>
