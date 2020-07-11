@@ -1,8 +1,94 @@
-.container {
+.club-container {
+    padding-left: 0;
+    padding-right: 0;
+
+    > .officials {
+        width: 100%; 
+        margin-bottom: 50px;
+
+        .official {
+            display: inline-block;
+            width: 175px;
+            margin: 0 10px;
+
+            > img.official-pic {
+                border-radius: 5px;
+                width: 100%;
+                box-shadow: var(--outset-neumorph);
+            }
+
+            > .official-type {
+                border-radius: 5px;
+                background: $primary-color;
+                text-transform: uppercase;
+                box-shadow: var(--outset-neumorph);
+                font-weight: normal;
+                padding: 10px 0;
+                margin: 10px 0;
+            }
+
+            > .official-data {
+                border-radius: 5px;
+                background: $primary-color;
+                box-shadow: var(--inset-neumorph);
+                font-weight: normal;
+                padding: 10px;
+                margin: 10px 0;
+
+                > .official-name {
+                    text-transform: uppercase;
+                    margin-bottom: 10px;
+                }
+            }
+        }
+    }
+
+    > .referees {
+        width: 100%; //TODO: add sideways scroll
+        margin-bottom: 50px;
+
+        .referee {
+            display: inline-block;
+            width: 175px;
+            margin: 0 10px;
+
+            > img.referee-pic {
+                border-radius: 5px;
+                width: 100%;
+                box-shadow: var(--outset-neumorph);
+            }
+
+            > .referee-name {
+                border-radius: 5px;
+                background: $primary-color;
+                text-transform: uppercase;
+                box-shadow: var(--outset-neumorph);
+                font-weight: normal;
+                padding: 10px 0;
+                margin: 10px 0;
+            }
+
+            > .referee-data {
+                border-radius: 5px;
+                background: $primary-color;
+                box-shadow: var(--inset-neumorph);
+                font-weight: normal;
+                padding: 10px;
+                margin: 10px 0;
+            }
+        }
+    }
+
+    > a.button {
+        margin-bottom: 50px;
+    }
+
+
     > .team-container {
         display: flex;
         flex-wrap: wrap;
-        justify-content: space-around;
+        justify-content: center;
+        margin: 0 25px;
 
         > .team {
             margin-bottom: 75px;
@@ -61,47 +147,41 @@
     }
 
     > .trainers {
-        justify-content: center;
-        overflow: hidden;
         width: 100%; //TODO: add sideways scroll
+        margin-bottom: 50px;
 
-        > .trainers-container {
-            width: max-content;
-            margin: auto;
+        .trainer {
+            display: inline-block;
+            width: 175px;
+            margin: 0 10px;
 
-            > .trainer {
-                display: inline-block;
-                width: 175px;
-                margin: 0 10px;
-    
-                > img.trainer-pic {
-                    border-radius: 5px;
-                    width: 100%;
-                    box-shadow: var(--outset-neumorph);
-                }
-    
-                > .trainer-type {
-                    border-radius: 5px;
-                    background: $primary-color;
+            > img.trainer-pic {
+                border-radius: 5px;
+                width: 100%;
+                box-shadow: var(--outset-neumorph);
+            }
+
+            > .trainer-type {
+                border-radius: 5px;
+                background: $primary-color;
+                text-transform: uppercase;
+                box-shadow: var(--outset-neumorph);
+                font-weight: normal;
+                padding: 10px 0;
+                margin: 10px 0;
+            }
+
+            > .trainer-data {
+                border-radius: 5px;
+                background: $primary-color;
+                box-shadow: var(--inset-neumorph);
+                font-weight: normal;
+                padding: 10px;
+                margin: 10px 0;
+
+                > .trainer-name {
                     text-transform: uppercase;
-                    box-shadow: var(--outset-neumorph);
-                    font-weight: normal;
-                    padding: 10px 0;
-                    margin: 10px 0;
-                }
-    
-                > .trainer-data {
-                    border-radius: 5px;
-                    background: $primary-color;
-                    box-shadow: var(--inset-neumorph);
-                    font-weight: normal;
-                    padding: 10px;
-                    margin: 10px 0;
-
-                    > .trainer-name {
-                        text-transform: uppercase;
-                        margin-bottom: 10px;
-                    }
+                    margin-bottom: 10px;
                 }
             }
         }

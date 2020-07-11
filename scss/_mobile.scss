@@ -42,24 +42,20 @@
     .home-boxes {
         display: flex;
         flex-wrap: wrap;
-        justify-content: space-around;
+        justify-content: center;
 
         > .home-box {
             max-width: 40%;
+            margin-left: 10px;
+            margin-right: 10px;
         }
     }
 }
 
 @media(min-width: 1100px) {
     .home-boxes {
-        display: flex;
-        width: max-content;
-        margin: auto;
-
         > .home-box {
             max-width: 200px;
-            margin-left: 10px;
-            margin-right: 10px;
         }
     }
 }

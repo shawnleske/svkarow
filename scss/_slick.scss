@@ -1,0 +1,135 @@
+.carousel-movement {
+    width: max-content;
+    margin: auto;
+    margin-top: 25px;
+
+    &::after {
+        content: '';
+        display: block;
+        height: 0;
+        clear: both;
+    }
+}
+
+.carousel-prev-arrow,
+.carousel-next-arrow
+{
+    font-size: 1.8em;
+    line-height: 30px;
+    display: block;
+    width: 30px;
+    height: 30px;
+    padding: 0;
+    cursor: pointer;
+    border: none;
+    outline: none;
+    background: $neutral-color;
+    box-shadow: var(--outset-neumorph);
+    border-radius: 5px;
+    color: $primary-color;
+    font-size: 1.8em;
+    transition: color 0.25s, background-color 0.25s;
+    float: left;
+
+    &:hover {
+        background-color: $primary-color;
+        color: $neutral-color;
+    }
+}
+// .slick-prev:hover,
+// .slick-prev:focus,
+// .slick-next:hover,
+// .slick-next:focus
+// {
+//     color: transparent;
+//     outline: none;
+//     background: transparent;
+// }
+// .slick-prev:hover:before,
+// .slick-prev:focus:before,
+// .slick-next:hover:before,
+// .slick-next:focus:before
+// {
+//     opacity: 1;
+// }
+// .slick-prev.slick-disabled:before,
+// .slick-next.slick-disabled:before
+// {
+//     opacity: .25;
+// }
+
+.carousel-prev-arrow:before
+{
+    content: '←';
+}
+
+[dir='rtl'] .carousel-prev-arrow:before
+{
+    content: '→';
+}
+
+.carousel-next-arrow:before
+{
+    content: '→';
+}
+
+[dir='rtl'] .carousel-next-arrow:before
+{
+    content: '←';
+}
+
+// /* Dots */
+.carousel-dots {
+    display: block;
+    float: left;
+    margin: 0 10px;
+}
+
+.slick-dots
+{
+    display: block;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    text-align: center;
+}
+
+.slick-dots li
+{
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    margin: 5px 5px;
+    padding: 0;
+    cursor: pointer;
+}
+
+.slick-dots li button
+{
+    font-size: 0;
+    line-height: 0;
+    display: block;
+    width: 20px;
+    height: 20px;
+    padding: 0px;
+    border: none;
+    cursor: pointer;
+    
+    background: $primary-color;
+    box-shadow: var(--outset-neumorph);
+    border-radius: 50%;
+    transition: box-shadow 0.25s;
+}
+
+.slick-dots li button:hover,
+.slick-dots li button:focus,
+.slick-dots li.slick-active button
+{
+    box-shadow: var(--inset-neumorph);
+}
+
+.slick-dots li button:before
+{
+    display: none
+}

@@ -1,6 +1,7 @@
 @import 'config';
 @import 'utilities';
 //SITES
+@import 'slick';
 @import 'home';
 @import 'club';
 @import 'shop';
@@ -22,7 +23,7 @@
 
 body {
     font-family: $font-stack;
-    width: 100vw;
+    width: 100%;
     height: 100vh;
     font-size: 12px;
     margin: 0;
@@ -161,7 +162,7 @@ header {
                 grid-area: club-name;
                 height: 60px;
                 line-height: 60px;
-                margin: 0;
+                margin: 0 0 0 15px;
                 color: $neutral-color;
                 text-decoration: none;
                 text-shadow: 
@@ -280,7 +281,6 @@ main {
 
     > .main-container { //TODO: add yellow left side
         @include set-background($primary-color);
-        padding: 20px 0;
         text-align: center;
         font-size: 1.1em;
         min-height: 600px;

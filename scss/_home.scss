@@ -107,7 +107,8 @@
 }
 
 .home-container {
-    padding: 0 25px;
+    padding-right: 25px;
+    padding-left: 25px;
 
     > h2 {
         color: $neutral-color;
@@ -151,8 +152,7 @@
 }
 
 .news-container {
-    padding: 25px;
-    padding-top: 0px; 
+    padding: 0 25px 50px 25px;
 }
 
 .news {
