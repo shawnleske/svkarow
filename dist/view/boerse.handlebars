@@ -9,55 +9,41 @@
     </div>
     <h3>Biete</h3>
     <div class="sell-container">
+        {{#each offerProducts}}
         <div class="sell-entry">
+            {{#if Bilder}}
             <div class="image-container">
-                <img class="photo" src="./img/shoes1.jpg" alt="sell-item-image">
-                <img class="photo" src="./img/shoes2.jpg" alt="sell-item-image">
+                {{#each Bilder}}
+                <img src="{{../../apiUrl}}{{url}}" alt="{{alternativeText}}" class="sell-item-image">
+                {{/each}}
             </div>
-            <h4 class="title">Fußballschuhe</h4>
+            {{/if}}
+            <h4 class="title">{{Titel}}</h4>
             <div class="row">
-                <div class="tel">Tel: 0176 1234 5678</div>
-                <div class="price">5,00 €</div>
+                <div class="tel">Tel: {{Tel}}</div>
+                <div class="price">{{Preis}}</div>
             </div>
-            <div class="desc"><p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor</p></div>
+            {{#if Info}}
+            <div class="desc"><p>{{Info}}</p></div>
+            {{/if}}
         </div>
-        <div class="sell-entry">
-            <div class="image-container">
-                <img class="photo" src="./img/shoes1.jpg" alt="sell-item-image">
-                <img class="photo" src="./img/shoes2.jpg" alt="sell-item-image">
-            </div>
-            <h4 class="title">Fußballschuhe</h4>
-            <div class="row">
-                <div class="tel">Tel: 0176 1234 5678</div>
-                <div class="price">5,00 €</div>
-            </div>
-            <div class="desc"><p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor</p></div>
-        </div>
-        <div class="sell-entry">
-            <div class="image-container">
-                <img class="photo" src="./img/shoes1.jpg" alt="sell-item-image">
-                <img class="photo" src="./img/shoes2.jpg" alt="sell-item-image">
-            </div>
-            <h4 class="title">Fußballschuhe</h4>
-            <div class="row">
-                <div class="tel">Tel: 0176 1234 5678</div>
-                <div class="price">5,00 €</div>
-            </div>
-            <div class="desc"><p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor</p></div>
-        </div>
+        {{/each}}
+        {{#unless offerProducts}}
+        <!-- TODO: Default when no entries -->
+        {{/unless}}
     </div>
     <h3>Suche</h3>
     <div class="buy-container">
+        {{#each searchProducts}}
         <div class="buy-entry">
-            <h4 class="title">Torwart Handschuhe</h4>
-            <div class="desc"><p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor</p></div>
-            <div class="row"><div class="tel">Tel: 0176 1234 5678</div></div>
+            <h4 class="title">{{Titel}}</h4>
+            <div class="desc"><p>{{Beschreibung}}</p></div>
+            <div class="row"><div class="tel">Tel: {{Tel}}</div></div>
         </div>
-        <div class="buy-entry">
-            <h4 class="title">Torwart Handschuhe</h4>
-            <div class="desc"><p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor</p></div>
-            <div class="row"><div class="tel">Tel: 0176 1234 5678</div></div>
-        </div>
+        {{/each}}
+        {{#unless searchProducts}}
+            <div class="buy-empty"><p>Zurzeit befindet sich niemand auf der Suche nach einem Produkt!</p></div>
+        {{/unless}}
     </div>
     <!-- TODO: paginator 5 entries -->
 </div>
