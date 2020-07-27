@@ -11,7 +11,15 @@ const formatter = new Intl.NumberFormat('de-DE', {
 
 router.get('/', (req, res) => res.render('home'));
 router.get('/home', (req, res) => res.render('home'));
-router.get('/news', (req, res) => res.render('news'));
+router.get('/news', (req, res) => {
+
+    res.render('news')
+});
+
+router.get('/datenschutz', (req, res) => {
+
+    res.render('news')
+});
 
 router.get('/verein', (req, res) => {
     axios.all([
