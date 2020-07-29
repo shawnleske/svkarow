@@ -274,7 +274,7 @@ header {
 
 main {
     margin-top: 62px;
-    margin-bottom: 196px; //TODO: get footer height dynamically
+    margin-bottom: 246px; //TODO: get footer height dynamically
     box-shadow: var(--box-shadow);
     position: relative;
     z-index: 2;
@@ -295,7 +295,7 @@ footer {
 
     > .sponsors {
         width: 100%;
-        height: 90px;
+        height: 140px;
         background: url("../img/bg_sponsors.png") repeat;
         box-shadow: inset 0px 0px 44px rgba(255, 255, 255, 0.11);
 
@@ -307,15 +307,16 @@ footer {
             > a {
                 margin: 10px;
 
-                > img {
-                    filter: grayscale(100%);
-                    transition: filter 0.25s;
-
-                }
-
                 &:hover > img {
                     filter: grayscale(0%);
                 }
+            }
+
+            img {
+                height: 100px;
+                filter: grayscale(100%);
+                transition: filter 0.25s;
+
             }
         }
     }

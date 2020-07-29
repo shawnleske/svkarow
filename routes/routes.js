@@ -1,8 +1,13 @@
 const express = require('express');
 const router = express.Router();
 const axios = require('axios');
-const apiUrl = 'https://svkarowapi.herokuapp.com';
 
+//FACEBOOK
+const accessToken = 'EAAJAzWxdnSgBALzg9ZCelZAKZA20gVntTXHAttyKSITmEWj4N1lVoDloZBj6dWZAMrZAlZBU55EhyVMpaaD5XZBROtflaiMZAFjVYZBISPZAGrx1BsfUddXJJJwEhfvBVTqGuZCv4FwvJ20wms0xL3BD7qzDlFNasydN45wSZCqPEXT0ohwZDZD'
+const siteId = '101205241692727';
+const fbUrl = 'https://graph.facebook.com/v7.0/' + siteId + '/posts?access_token=' + accessToken;
+
+// Price-formatter
 const formatter = new Intl.NumberFormat('de-DE', {
     style: 'currency',
     currency: 'EUR',
@@ -13,12 +18,17 @@ router.get('/', (req, res) => res.render('home'));
 router.get('/home', (req, res) => res.render('home'));
 router.get('/news', (req, res) => {
 
-    res.render('news')
+    res.render('news');
 });
 
+//TODO: fb api to news
 router.get('/datenschutz', (req, res) => {
-
-    res.render('news')
+    axios.get(fbUrl).then(data => {
+        console.log(data.data.data);
+        res.render('news', {data:data.data.data});
+    }).catch(err => {
+        console.log(err);
+    });
 });
 
 router.get('/verein', (req, res) => {
@@ -27,7 +37,7 @@ router.get('/verein', (req, res) => {
         axios.get(apiUrl + '/schiedsrichters', {responseType: "json"}),
         axios.get(apiUrl + '/teams', {responseType: "json"})
     ]).then(axios.spread((officials, referees, teams) => {
-        res.render('verein', {apiUrl: apiUrl, officials:officials.data, referees:referees.data, teams:teams.data});
+        res.render('verein', {officials:officials.data, referees:referees.data, teams:teams.data});
     })).catch(err => {
         console.log(err);
     });
@@ -45,11 +55,8 @@ router.get('/kleiderboerse', (req, res) => {
             e.Preis = formatter.format(parseInt(e.Preis));
             return e;
         });
-
-
-        console.log(offerProductsArr);
         
-        res.render('boerse', {apiUrl: apiUrl, offerProducts:offerProductsArr, searchProducts:searchProducts.data});
+        res.render('boerse', {offerProducts:offerProductsArr, searchProducts:searchProducts.data});
     })).catch(err => {
         console.log(err);
     });
@@ -86,7 +93,7 @@ router.get('/team/:id', (req, res) =>  {
                     }
                 });
             }
-            res.render('team', {apiUrl: apiUrl, data: team.data});
+            res.render('team', {data: team.data});
         })
         .catch(err => {
         console.log(err);

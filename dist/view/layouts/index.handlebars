@@ -43,8 +43,9 @@
     <footer>
       <div class="sponsors">
         <div class="sponsors-container">
-          <a href="/"><img width="77" height="50" src="/img/logo.png" alt="sponsor-elektro-bechert"></a><!--
-        --><a href="/"><img width="77" height="50" src="/img/logo.png" alt="sponsor-rewe"></a>
+          {{#each (sponsors)}}
+          {{#if Link}}<a href="{{Link}}">{{/if}}<img src="{{apiUrl}}{{Bild.url}}" alt="{{Bild.alternativeText}}">{{#if Link}}</a>{{/if}}
+          {{/each}}
         </div>
       </div>
       <div class="footer-infos">
@@ -69,7 +70,7 @@
           <li><a href="/">Impressum</a></li>
           <li><a href="/">Datenschutz</a></li>
         </ul>
-        <div class="copyright">Copyright 2020 Shawn Leske</div>
+        <div class="copyright">Copyright &copy; 2020 Shawn Leske</div>
       </div>
     </footer>
   </body>

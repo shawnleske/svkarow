@@ -4,7 +4,7 @@ const hbs = handlebars.create({
     extname      :'handlebars',
     layoutsDir   : 'dist/view/layouts',
     defaultLayout: 'index',
-    helpers      : 'dist/view/helpers',
+    helpers      : helpers,
     partialsDir  : [
         'dist/view/partials'
     ]
