@@ -1,8 +1,8 @@
 $(() => {
-    initBanner();
     initMenu();
     initNews();
     initSlick();
+    initBanner();
 });
 
 function initSlick() {
@@ -14,6 +14,7 @@ function initSlick() {
     $carousel.each(function() {
         var $carouselElems = $(this).children();
 
+        // ONLY CREATE CAROUSEL WHEN MORE WIDTH THEN SCREEN
         // TODO: BEWARE: Doesn't really work when children have different widths as it only checks the 1st elem
         if($carouselElems.outerWidth(true)*$carouselElems.length >= $(this).parent().width()) {
             createCarousel($(this));
@@ -109,36 +110,25 @@ function initBanner() {
         return;
 
     var $imageContainer = $('.banner > .image-container');
+    var hasAutoplay = $imageContainer.attr('data-banner-autoplay') !== undefined && $imageContainer.attr('data-banner-autoplay') !== false;
+    var autoplaySpeed = hasAutoplay ? $imageContainer.attr('data-banner-autoplay') * 1000 : 5000;
+
+    console.log(hasAutoplay, autoplaySpeed);
 
     if(!$imageContainer.length)
         return console.log('image container nicht gefunden');
 
-    $.ajax({
-        url : "/api/bannerimages",
-        success: images => {
-            
-            if(!images.length){
-                console.warn('Es konnten keine Bannerbilder gefunden werden!');
-                return;
-            }
-
-            images.forEach((imageName, i) => {
-                if( imageName.match(/\.(jpe?g|png|gif)$/) ) { 
-                    $imageContainer.append( "<img src='/img/banner/"+ imageName +"' style=left:" + i*100 + "%; >" );
-                }
-            });
-
-            if(images.length > 1) {
-                $('.banner > .banner-arrows').show();
-                $('.banner').attr('data-active-banner', 0);
-
-                let $bannerArrowLeft = $('.banner > .banner-arrows > #banner-arrow-left');
-                let $bannerArrowRight = $('.banner > .banner-arrows > #banner-arrow-right');
-
-                $('.banner > .banner-arrows > .banner-arrow').click(e => {
-                    //TODO: do banner, try infinite scrolling to left and right, don't forget handy
-                });
-            }
-        }
+    $imageContainer.slick({
+        autoplay: hasAutoplay,
+        autoplaySpeed: autoplaySpeed,
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        infinite: true,
+        variableWidth: false,
+        centerMode: false,
+        dots: true,
+        prevArrow: $('.banner > .banner-arrows > #banner-arrow-left'),
+        nextArrow: $('.banner > .banner-arrows > #banner-arrow-right'),
+        appendDots: $imageContainer.siblings('.banner-dots')
     });
 }

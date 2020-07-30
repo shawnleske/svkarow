@@ -1,10 +1,15 @@
 
 <div class="banner">
-    <div class="image-container"></div>
+    <div {{#if banner.Autoplay}}data-banner-autoplay="{{banner.AutoplaySekunden}}"{{/if}} class="image-container">
+        {{#each banner.Bilder}}
+        <img src="{{apiUrl}}{{url}}" alt="{{alternativeText}}" class="banner-pic">
+        {{/each}}
+    </div>
     <div class="banner-arrows">
         <div class="banner-arrow" id="banner-arrow-left" ></div>
         <div class="banner-arrow" id="banner-arrow-right" ></div>
     </div>
+    <div class="banner-dots"></div>
 </div>
 <div class="container home-container">
     <h2>Herzlich Willkommen beim <div>SV KAROW 96</div></h2>

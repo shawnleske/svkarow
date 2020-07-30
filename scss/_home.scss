@@ -8,7 +8,7 @@
     background: #363636;
 
     &:hover {
-        > .banner-arrows {
+        > .banner-arrows, > .banner-dots {
             opacity: 1;
         }
     }
@@ -19,13 +19,6 @@
         height: 200px;
         overflow: hidden;
         max-height: 50vh;
-
-        > img {
-            position: absolute;
-            display: block;
-            width: 100%;
-            transition: left 0.5s;
-        }
     }
 
     > .banner-arrows {
@@ -35,8 +28,7 @@
         height: 30px;
         width: 100%;
         opacity: 0;
-        transition: opacity 0.5s;
-        display: none;
+        transition: opacity 0.25s;
 
         &::after {
             content: '';
@@ -53,6 +45,7 @@
             position: relative;
             transition: opacity 0.5s;
             cursor: pointer;
+            box-shadow: var(--box-shadow);
 
             &:hover {
                 opacity: 1;
@@ -95,6 +88,41 @@
                     transform: rotateZ(-35deg);
                 }
             }
+        }
+    }
+
+    > .banner-dots {
+        position: absolute;
+        z-index: 4;
+        bottom: 0;
+        width: 100%;
+        opacity: 0;
+        transition: opacity 0.25s;
+
+        .slick-dots li
+        {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            margin: 10px 5px;
+        }
+
+        .slick-dots li button
+        {
+            width: 10px;
+            height: 10px;
+            box-shadow: var(--box-shadow);
+            border-radius: 50%;
+            opacity: 0.5;
+            transition: opacity 0.25s;
+        }
+
+        .slick-dots li button:hover,
+        .slick-dots li button:focus,
+        .slick-dots li.slick-active button
+        {
+            opacity: 1;
+            box-shadow: var(--box-shadow);
         }
     }
 }

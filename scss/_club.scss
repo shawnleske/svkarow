@@ -120,19 +120,9 @@
                 box-shadow: var(--outset-neumorph);
                 margin-bottom: 10px;
             }
-    
+
             > a.button {
-                > .button-arrow {
-                    display: none;
-                }
-    
-                &:first-of-type{
-                    float: left;
-                }
-    
-                &:last-of-type {
-                    float: right;
-                }
+                float: left;
             }
         }
     }

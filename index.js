@@ -17,7 +17,6 @@ axios.get(apiUrl + '/sponsorens', {responseType: "json"})
     })
     .then(() => {
         const hbs = require('./handlebars');
-        console.log(hbs.helpers.sponsors);
         const app = express();
         const PORT = process.env.PORT || 5000;
 
@@ -27,7 +26,6 @@ axios.get(apiUrl + '/sponsorens', {responseType: "json"})
         app.set('views', path.join(__dirname, 'dist', 'view'));
 
         app.use(express.static(path.join(__dirname, 'dist')));
-        app.use('/api/bannerimages', require('./routes/api/banner')); //TODO: replace api with server side rendering (load banner as variable in index.handlebars)
         app.use('/', require('./routes/routes'));
 
         app.use((req, res) => {

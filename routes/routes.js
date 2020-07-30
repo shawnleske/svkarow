@@ -14,12 +14,17 @@ const formatter = new Intl.NumberFormat('de-DE', {
     minimumFractionDigits: 2
 });
 
-router.get('/', (req, res) => res.render('home'));
-router.get('/home', (req, res) => res.render('home'));
-router.get('/news', (req, res) => {
+function renderHome(req, res) {
+    axios.get(apiUrl + '/banner').then(data => {
+        res.render('home', {banner:data.data});
+    }).catch(err => {
+        console.log(err);
+    });
+}
 
-    res.render('news');
-});
+router.get('/', (req, res) => renderHome(req, res));
+router.get('/home', (req, res) => renderHome(req, res));
+router.get('/news', (req, res) => res.render('news'));
 
 //TODO: fb api to news
 router.get('/datenschutz', (req, res) => {
