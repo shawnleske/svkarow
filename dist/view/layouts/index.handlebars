@@ -27,13 +27,13 @@
       </div>
       <nav>
         <ul>
-          <li><a href="/">Home</a></li>
-          <li><a href="/news">News</a></li>
-          <li><a href="/verein">Verein</a></li>
-          <li><a href="/galerie">Galerie</a></li>
-          <li><a href="/shop">Shop</a></li>
-          <li><a href="/kleiderboerse">Kleiderbörse</a></li>
-          <li><a href="/downloads">Downloads</a></li>
+          <li {{#if active.home}}class="active"{{/if}}><a href="/">Home</a></li>
+          <li {{#if active.news}}class="active"{{/if}}><a href="/news">News</a></li>
+          <li {{#if active.verein}}class="active"{{/if}}><a href="/verein">Verein</a></li>
+          <li {{#if active.galerie}}class="active"{{/if}}><a href="/galerie">Galerie</a></li>
+          <li {{#if active.shop}}class="active"{{/if}}><a href="/shop">Shop</a></li>
+          <li {{#if active.boerse}}class="active"{{/if}}><a href="/kleiderboerse">Kleiderbörse</a></li>
+          <li {{#if active.downloads}}class="active"{{/if}}><a href="/downloads">Downloads</a></li>
         </ul>
       </nav>
     </header>

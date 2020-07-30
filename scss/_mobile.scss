@@ -75,3 +75,53 @@
         }
     }
 }
+
+@media(min-width: 900px) {
+    header {
+        > .header-bar {
+            > a {
+                position: relative;
+                z-index: 1000;
+            }
+
+            > .nav-button {
+                display: none;
+            }
+        }
+
+        > nav {
+            display: block;
+            width: auto;
+            position: absolute;
+            right: 0;
+            top: 0;
+    
+            > ul {
+                display: block;
+                width: auto;
+                float: right;
+                margin-right: 20px;
+    
+                > li {
+                    display: inline-block;
+                    margin: 0 10px;
+
+                    > a {
+                        border-bottom: none;
+                        background: none;
+                        width: auto;
+                        color: $secondary-color;
+                        font-weight: bold;
+                        height: 60px;
+                        line-height: 60px;
+                    }
+    
+                    &:hover > a, &.active > a{
+                        background: none;
+                        color: $neutral-color;
+                    }
+                }
+            }
+        }
+    }
+}

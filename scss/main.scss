@@ -244,7 +244,6 @@ header {
         > ul {
             display: block;
             width: 100%;
-            width: 100%;
 
             > li {
                 > a {
@@ -261,7 +260,7 @@ header {
                     @include font-size(1);
                     color: $secondary-color;
                     font-weight: bold;
-                    transition: background-color 0.5s, color 0.5s !important;
+                    transition: background-color 0.25s, color 0.25s !important;
                 }
 
                 &:hover > a, &.active > a{

@@ -113,8 +113,6 @@ function initBanner() {
     var hasAutoplay = $imageContainer.attr('data-banner-autoplay') !== undefined && $imageContainer.attr('data-banner-autoplay') !== false;
     var autoplaySpeed = hasAutoplay ? $imageContainer.attr('data-banner-autoplay') * 1000 : 5000;
 
-    console.log(hasAutoplay, autoplaySpeed);
-
     if(!$imageContainer.length)
         return console.log('image container nicht gefunden');
 

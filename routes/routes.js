@@ -16,7 +16,7 @@ const formatter = new Intl.NumberFormat('de-DE', {
 
 function renderHome(req, res) {
     axios.get(apiUrl + '/banner').then(data => {
-        res.render('home', {banner:data.data});
+        res.render('home', {active:{home:true}, banner:data.data});
     }).catch(err => {
         console.log(err);
     });
@@ -24,7 +24,8 @@ function renderHome(req, res) {
 
 router.get('/', (req, res) => renderHome(req, res));
 router.get('/home', (req, res) => renderHome(req, res));
-router.get('/news', (req, res) => res.render('news'));
+router.get('/news', (req, res) => res.render('news', {active:{news:true}}));
+router.get('/downloads', (req, res) => res.render('downloads', {active:{downloads:true}}));
 
 //TODO: fb api to news
 router.get('/datenschutz', (req, res) => {
@@ -42,14 +43,14 @@ router.get('/verein', (req, res) => {
         axios.get(apiUrl + '/schiedsrichters', {responseType: "json"}),
         axios.get(apiUrl + '/teams', {responseType: "json"})
     ]).then(axios.spread((officials, referees, teams) => {
-        res.render('verein', {officials:officials.data, referees:referees.data, teams:teams.data});
+        res.render('verein', {active:{verein:true}, officials:officials.data, referees:referees.data, teams:teams.data});
     })).catch(err => {
         console.log(err);
     });
 });
 
-router.get('/shop', (req, res) => res.render('shop'));
-router.get('/galerie', (req, res) => res.render('gallery'));
+router.get('/shop', (req, res) => res.render('shop', {active:{shop:true}}));
+router.get('/galerie', (req, res) => res.render('gallery', {active:{galerie:true}}));
 
 router.get('/kleiderboerse', (req, res) => {
     axios.all([
@@ -61,7 +62,7 @@ router.get('/kleiderboerse', (req, res) => {
             return e;
         });
         
-        res.render('boerse', {offerProducts:offerProductsArr, searchProducts:searchProducts.data});
+        res.render('boerse', {active:{boerse:true}, offerProducts:offerProductsArr, searchProducts:searchProducts.data});
     })).catch(err => {
         console.log(err);
     });
@@ -72,7 +73,9 @@ router.get('/team/:id', (req, res) =>  {
     
     axios.get(apiUrl + '/teams/' + teamId, {responseType: "json"})
         .then(team => {
-            if(team.data.Torschuetzen !== null) {
+            team.data.Torschuetzen = Object.values(team.data.Torschuetzen);
+            
+            if(team.data.Torschuetzen !== null || team.data.Torschuetzen === undefined) {
                 team.data.Torschuetzen.sort((a, b) => {
                     if(a.goals > b.goals)
                         return -1;
@@ -98,11 +101,11 @@ router.get('/team/:id', (req, res) =>  {
                     }
                 });
             }
-            res.render('team', {data: team.data});
+            res.render('team', {active:{verein:true}, data: team.data});
         })
         .catch(err => {
-        console.log(err);
-    });
+            console.log(err);
+        });
 });
 
 module.exports = router;
