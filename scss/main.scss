@@ -6,6 +6,7 @@
 @import 'club';
 @import 'shop';
 @import 'boerse';
+@import 'gallery';
 
 :root {
     --outset-neumorph: 
@@ -47,6 +48,11 @@ a {
             0px 0px 50px black,
             0px 0px 50px black;
     }
+}
+
+// image-viewer css
+img.image-viewer, .image-viewer > img {
+    cursor: pointer;
 }
 
 a.button {

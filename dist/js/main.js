@@ -3,7 +3,19 @@ $(() => {
     initNews();
     initSlick();
     initBanner();
+    initViewer();
 });
+
+function initViewer() {
+    $elems = $('.image-viewer');
+
+    if(!$elems.length)
+        return;
+
+    $elems.each(function() {
+        $(this).viewer();
+    });
+}
 
 function initSlick() {
     var $carousel = $('.carousel');

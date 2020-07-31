@@ -1,0 +1,7 @@
+.gallery-container {
+    > .image-container {
+        > img {
+            max-height: 200px;
+        }
+    }
+}

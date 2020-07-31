@@ -6,7 +6,7 @@
             {{#each officials}}
             <div class="official">
                 {{#if Foto}}
-                <img src="{{apiUrl}}{{Foto.url}}" alt="{{Foto.alternativeText}}" class="official-pic">
+                <img src="{{apiUrl}}{{Foto.url}}" alt="{{Foto.alternativeText}}" class="official-pic image-viewer">
                 {{else}}
                 <img src="/img/placeholder.jpg" alt="Funkionär Platzhalter" class="official-pic">
                 {{/if}}
@@ -30,7 +30,7 @@
             {{#each referees}}
             <div class="referee">
                 {{#if Foto}}
-                <img src="{{apiUrl}}{{Foto.url}}" alt="{{Foto.alternativeText}}" class="referee-pic">
+                <img src="{{apiUrl}}{{Foto.url}}" alt="{{Foto.alternativeText}}" class="referee-pic image-viewer">
                 {{else}}
                 <img src="/img/placeholder.jpg" alt="Schiedsrichter Platzhalter" class="referee-pic">
                 {{/if}}
@@ -58,7 +58,7 @@
         <div class="team">
             <h3 class="team-name">{{Name}}</h3>
             {{#if Foto}}
-            <img src="{{apiUrl}}{{Foto.url}}" alt="{{Foto.alternativeText}}" class="team-pic">
+            <img src="{{apiUrl}}{{Foto.url}}" alt="{{Foto.alternativeText}}" class="team-pic image-viewer">
             {{else}}
             <img src="/img/placeholder_team.jpg" alt="Team Platzhalter" class="team-pic">
             {{/if}}
