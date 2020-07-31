@@ -13,6 +13,7 @@
     "axios": "^0.19.2",
     "express": "^4.17.1",
     "express-handlebars": "^5.1.0",
+    "showdown": "^1.9.1",
     "uuid": "^8.3.0"
   },
   "devDependencies": {

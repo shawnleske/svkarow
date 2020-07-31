@@ -1,6 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const axios = require('axios');
+const showdown = require('showdown');
+const handlebars = require('handlebars');
 
 //FACEBOOK
 const accessToken = 'EAAJAzWxdnSgBALzg9ZCelZAKZA20gVntTXHAttyKSITmEWj4N1lVoDloZBj6dWZAMrZAlZBU55EhyVMpaaD5XZBROtflaiMZAFjVYZBISPZAGrx1BsfUddXJJJwEhfvBVTqGuZCv4FwvJ20wms0xL3BD7qzDlFNasydN45wSZCqPEXT0ohwZDZD'
@@ -14,10 +16,27 @@ const formatter = new Intl.NumberFormat('de-DE', {
     minimumFractionDigits: 2
 });
 
+const showdownConverter = new showdown.Converter();
+
 function renderHome(req, res) {
-    axios.get(apiUrl + '/banner').then(data => {
-        res.render('home', {active:{home:true}, banner:data.data});
-    }).catch(err => {
+    axios.all([
+        axios.get(apiUrl + '/banner', {responseType: "json"}),
+        axios.get(apiUrl + '/home', {responseType: "json"})
+    ]).then(axios.spread((banner, page) => {
+        if(page.data.Spielertext !== undefined)
+            page.data.Spielertext = new handlebars.SafeString(showdownConverter.makeHtml(page.data.Spielertext));
+        
+        if(page.data.Trainertext !== undefined)
+            page.data.Trainertext = new handlebars.SafeString(showdownConverter.makeHtml(page.data.Trainertext));
+        
+        if(page.data.Schiedsrichter !== undefined)
+            page.data.Schiedsrichter = new handlebars.SafeString(showdownConverter.makeHtml(page.data.Schiedsrichter));
+        
+        if(page.data.Sponsorentext !== undefined)
+            page.data.Sponsorentext = new handlebars.SafeString(showdownConverter.makeHtml(page.data.Sponsorentext));
+
+        res.render('home', {active:{home:true}, banner:banner.data, page:page.data});
+    })).catch(err => {
         console.log(err);
     });
 }
