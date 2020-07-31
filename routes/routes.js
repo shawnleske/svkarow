@@ -29,8 +29,8 @@ function renderHome(req, res) {
         if(page.data.Trainertext !== undefined)
             page.data.Trainertext = new handlebars.SafeString(showdownConverter.makeHtml(page.data.Trainertext));
         
-        if(page.data.Schiedsrichter !== undefined)
-            page.data.Schiedsrichter = new handlebars.SafeString(showdownConverter.makeHtml(page.data.Schiedsrichter));
+        if(page.data.Schiedsrichtertext !== undefined)
+            page.data.Schiedsrichtertext = new handlebars.SafeString(showdownConverter.makeHtml(page.data.Schiedsrichtertext));
         
         if(page.data.Sponsorentext !== undefined)
             page.data.Sponsorentext = new handlebars.SafeString(showdownConverter.makeHtml(page.data.Sponsorentext));
