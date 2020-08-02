@@ -4,11 +4,6 @@ const axios = require('axios');
 const showdown = require('showdown');
 const handlebars = require('handlebars');
 
-//FACEBOOK
-const accessToken = 'EAAJAzWxdnSgBALzg9ZCelZAKZA20gVntTXHAttyKSITmEWj4N1lVoDloZBj6dWZAMrZAlZBU55EhyVMpaaD5XZBROtflaiMZAFjVYZBISPZAGrx1BsfUddXJJJwEhfvBVTqGuZCv4FwvJ20wms0xL3BD7qzDlFNasydN45wSZCqPEXT0ohwZDZD'
-const siteId = '101205241692727';
-const fbUrl = 'https://graph.facebook.com/v7.0/' + siteId + '/posts?access_token=' + accessToken;
-
 // Price-formatter
 const formatter = new Intl.NumberFormat('de-DE', {
     style: 'currency',
@@ -18,22 +13,30 @@ const formatter = new Intl.NumberFormat('de-DE', {
 
 const showdownConverter = new showdown.Converter();
 
+function getFbUrl(accessToken, siteId) {
+    return 'https://graph.facebook.com/v7.0/' + siteId + '/posts?access_token=' + accessToken;
+}
+
+function getSafeString(str) {
+    return new handlebars.SafeString(showdownConverter.makeHtml(str).replace(/<\/p>(\r\n|\n|\r)<p>/gm, '</p><p>').replace(/(\r\n|\n|\r)/gm, '<br>'));
+}
+
 function renderHome(req, res) {
     axios.all([
         axios.get(apiUrl + '/banner', {responseType: "json"}),
         axios.get(apiUrl + '/home', {responseType: "json"})
     ]).then(axios.spread((banner, page) => {
         if(page.data.Spielertext !== undefined)
-            page.data.Spielertext = new handlebars.SafeString(showdownConverter.makeHtml(page.data.Spielertext));
+            page.data.Spielertext = getSafeString(page.data.Spielertext);
         
         if(page.data.Trainertext !== undefined)
-            page.data.Trainertext = new handlebars.SafeString(showdownConverter.makeHtml(page.data.Trainertext));
+            page.data.Trainertext = getSafeString(page.data.Trainertext);
         
         if(page.data.Schiedsrichtertext !== undefined)
-            page.data.Schiedsrichtertext = new handlebars.SafeString(showdownConverter.makeHtml(page.data.Schiedsrichtertext));
+            page.data.Schiedsrichtertext = getSafeString(page.data.Schiedsrichtertext);
         
         if(page.data.Sponsorentext !== undefined)
-            page.data.Sponsorentext = new handlebars.SafeString(showdownConverter.makeHtml(page.data.Sponsorentext));
+            page.data.Sponsorentext = getSafeString(page.data.Sponsorentext);
 
         res.render('home', {active:{home:true}, banner:banner.data, page:page.data});
     })).catch(err => {
@@ -43,17 +46,27 @@ function renderHome(req, res) {
 
 router.get('/', (req, res) => renderHome(req, res));
 router.get('/home', (req, res) => renderHome(req, res));
-router.get('/news', (req, res) => res.render('news', {active:{news:true}}));
+
+router.get('/news', (req, res) => {
+    axios.get(apiUrl + '/news-seite', {responseType: "json"})
+        .then(page => {
+            axios.get(getFbUrl(page.data.FacebookToken, page.data.SeitenId))
+                .then(news => {
+                    res.render('news', {active:{news:true}, news:news.data.data, newsNum:page.data.AnzahlNewsProSeite});
+                })
+                .catch(err => {
+                    console.log(err);
+                });
+        })
+        .catch(err => {
+            console.log(err);
+        });
+});
+
 router.get('/downloads', (req, res) => res.render('downloads', {active:{downloads:true}}));
 
-//TODO: fb api to news
 router.get('/datenschutz', (req, res) => {
-    axios.get(fbUrl).then(data => {
-        console.log(data.data.data);
-        res.render('news', {data:data.data.data});
-    }).catch(err => {
-        console.log(err);
-    });
+    res.render('datenschutz', {data:data.data.data});
 });
 
 router.get('/verein', (req, res) => {
@@ -80,45 +93,50 @@ router.get('/verein', (req, res) => {
 });
 
 router.get('/shop', (req, res) => {
-    axios.get(apiUrl + '/shop-produkts', {responseType: "json"})
-        .then( products => {
-            var productsArr = products.data.map(function(e) {
-                e.Preis = formatter.format(parseFloat(e.Preis));
-                e.BilderTyp = {};
+    axios.all([
+        axios.get(apiUrl + '/fanshop', {responseType: "json"}),
+        axios.get(apiUrl + '/shop-produkts', {responseType: "json"})
+    ]).then(axios.spread( (page, products) => {
+        var productsArr = products.data.map(function(e) {
+            e.Preis = formatter.format(parseFloat(e.Preis));
+            e.BilderTyp = {};
 
-                if(e.Bilder.length > 1) {
-                    if(e.Bilder[0].width > e.Bilder[0].height)
-                        e.BilderTyp.horizontal = true;
-                    else
-                        e.BilderTyp.vertical = true;
-                } else {
-                    e.BilderTyp.single = true;
-                }
+            if(e.Bilder.length > 1) {
+                if(e.Bilder[0].width > e.Bilder[0].height)
+                    e.BilderTyp.horizontal = true;
+                else
+                    e.BilderTyp.vertical = true;
+            } else {
+                e.BilderTyp.single = true;
+            }
 
-                return e;
-            });
-            
-            res.render('shop', {active:{shop:true}, products: productsArr})
-        }).catch(err => {
-            console.log(err);
+            return e;
         });
+
+        page.data.Info = getSafeString(page.data.Info);
+        
+        res.render('shop', {active:{shop:true}, page:page.data, products: productsArr})
+    })).catch(err => {
+        console.log(err);
+    });
 });
 router.get('/galerie', (req, res) => res.render('gallery', {active:{galerie:true}}));
 
 router.get('/kleiderboerse', (req, res) => {
     axios.all([
+        axios.get(apiUrl + '/kleiderboerse', {responseType: "json"}),
         axios.get(apiUrl + '/produkt-bietes', {responseType: "json"}),
         axios.get(apiUrl + '/produkt-suches', {responseType: "json"}),
-    ]).then(axios.spread((offerProducts, searchProducts) => {
+    ]).then(axios.spread((page, offerProducts, searchProducts) => {
         var offerProductsArr = offerProducts.data.map(function(e) {
             e.Preis = formatter.format(parseFloat(e.Preis));
             
             return e;
         });
 
-
+        page.data.Info = getSafeString(page.data.Info);
         
-        res.render('boerse', {active:{boerse:true}, offerProducts:offerProductsArr, searchProducts:searchProducts.data});
+        res.render('boerse', {active:{boerse:true}, page:page.data, offerProducts:offerProductsArr, searchProducts:searchProducts.data});
     })).catch(err => {
         console.log(err);
     });

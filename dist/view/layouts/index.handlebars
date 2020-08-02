@@ -53,21 +53,14 @@
       </div>
       <div class="footer-infos">
         <div class="footer-infos-top">
-          <p>
-            SV Karow 96<br><br>
-
-            Postanschrift:<br>
-            Postfach 74 02 35<br>
-            13092 Berlin<br><br>
-            
-            Telefon:    0176 576 970 94<br>
-            Telefax:     030 032 122 512 955<br><br>
-            
-            eMail:        vorstand@sv-karow-96.de
-          </p>
+          {{#if (contact)}}
+          <div class="contact">{{contact}}</div>
+          {{/if}}
+          {{#if (showMaps)}}
           <div class="maps">
             <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d38759.48744284697!2d13.494622!3d52.615387!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x4099734499cbe1e4!2sSV%20Karow%2096!5e0!3m2!1sde!2sde!4v1594320589067!5m2!1sde!2sde" width="250" height="200" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
           </div>
+          {{/if}}
         </div>
         <ul class="footer-menu">
           <li><a href="/">Impressum</a></li>
