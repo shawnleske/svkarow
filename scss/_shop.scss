@@ -35,7 +35,7 @@
         justify-content: center;
 
         > .fan-shop-entry {
-            max-width: 350px;
+            max-width: 250px;
             margin: 0 25px;
             margin-bottom: 50px;
 
@@ -64,6 +64,17 @@
 
                     &:nth-child(1), &:nth-child(2) {
                         margin-top: 0;
+                    }
+                }
+            }
+
+            > .image-container.horizontal, > .image-container.single {
+                > img {
+                    width: 100%;
+                    float: none;
+
+                    &:nth-child(2) {
+                        margin-top: 20px;
                     }
                 }
             }

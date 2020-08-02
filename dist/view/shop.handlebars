@@ -9,38 +9,24 @@
     <h3>Fan Shop</h3>
     <p>!!! Ab sofort zu jedem Heimspieltag oder in der Geschäftsstelle erhältlich !!!</p> 
     <div class="fan-shop-container">
+        {{#each products}}
         <div class="fan-shop-entry">
-            <div class="image-container">
-                <img class="photo" src="./img/shoes1.jpg" alt="sell-item-image image-viewer">
-                <img class="photo" src="./img/shoes2.jpg" alt="sell-item-image image-viewer">
+            <div class="image-container {{#if BilderTyp.single}}single{{else if BilderTyp.horizontal}}horizontal{{else if BilderTyp.vertical}}vertical{{/if}}">
+                {{#each Bilder}}
+                <img src="{{apiUrl}}{{url}}" alt="{{alternativeText}}" class="shop-item-image image-viewer">
+                {{/each}}
             </div>
-            <h4 class="title">Fußballschuhe</h4>
-            <div class="desc"><p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor</p></div>
+            <h4 class="title">{{Titel}}</h4>
+            {{#if Info}}
+            <div class="desc"><p>{{Info}}</p></div>
+            {{/if}}
             <div class="row">
-                <div class="price">5,00 €</div>
+                <div class="price">{{Preis}}</div>
             </div>
         </div>
-        <div class="fan-shop-entry">
-            <div class="image-container">
-                <img class="photo" src="./img/shoes1.jpg" alt="sell-item-image image-viewer">
-                <img class="photo" src="./img/shoes2.jpg" alt="sell-item-image image-viewer">
-            </div>
-            <h4 class="title">Fußballschuhe</h4>
-            <div class="desc"><p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor</p></div>
-            <div class="row">
-                <div class="price">5,00 €</div>
-            </div>
-        </div>
-        <div class="fan-shop-entry">
-            <div class="image-container">
-                <img class="photo" src="./img/shoes1.jpg" alt="sell-item-image image-viewer">
-                <img class="photo" src="./img/shoes2.jpg" alt="sell-item-image image-viewer">
-            </div>
-            <h4 class="title">Fußballschuhe</h4>
-            <div class="desc"><p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor</p></div>
-            <div class="row">
-                <div class="price">5,00 €</div>
-            </div>
-        </div>
+        {{/each}}
+        {{#unless products}}
+        <!-- TODO: Default when no entries -->
+        {{/unless}}
     </div>
 </div>

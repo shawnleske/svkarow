@@ -68,7 +68,30 @@ router.get('/verein', (req, res) => {
     });
 });
 
-router.get('/shop', (req, res) => res.render('shop', {active:{shop:true}}));
+router.get('/shop', (req, res) => {
+    axios.get(apiUrl + '/shop-produkts', {responseType: "json"})
+        .then( products => {
+            var productsArr = products.data.map(function(e) {
+                e.Preis = formatter.format(parseFloat(e.Preis));
+                e.BilderTyp = {};
+
+                if(e.Bilder.length > 1) {
+                    if(e.Bilder[0].width > e.Bilder[0].height)
+                        e.BilderTyp.horizontal = true;
+                    else
+                        e.BilderTyp.vertical = true;
+                } else {
+                    e.BilderTyp.single = true;
+                }
+
+                return e;
+            });
+            
+            res.render('shop', {active:{shop:true}, products: productsArr})
+        }).catch(err => {
+            console.log(err);
+        });
+});
 router.get('/galerie', (req, res) => res.render('gallery', {active:{galerie:true}}));
 
 router.get('/kleiderboerse', (req, res) => {
@@ -77,9 +100,12 @@ router.get('/kleiderboerse', (req, res) => {
         axios.get(apiUrl + '/produkt-suches', {responseType: "json"}),
     ]).then(axios.spread((offerProducts, searchProducts) => {
         var offerProductsArr = offerProducts.data.map(function(e) {
-            e.Preis = formatter.format(parseInt(e.Preis));
+            e.Preis = formatter.format(parseFloat(e.Preis));
+            
             return e;
         });
+
+
         
         res.render('boerse', {active:{boerse:true}, offerProducts:offerProductsArr, searchProducts:searchProducts.data});
     })).catch(err => {
