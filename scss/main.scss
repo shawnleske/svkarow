@@ -7,6 +7,7 @@
 @import 'shop';
 @import 'boerse';
 @import 'gallery';
+@import 'downloads';
 
 :root {
     --outset-neumorph: 
@@ -69,6 +70,7 @@ a.button {
     &:hover {
         background-color: $primary-color;
         color: $neutral-color;
+        text-shadow: none;
 
         > .button-arrow {
             background-color: $neutral-color;

@@ -63,7 +63,33 @@ router.get('/news', (req, res) => {
         });
 });
 
-router.get('/downloads', (req, res) => res.render('downloads', {active:{downloads:true}}));
+router.get('/downloads', (req, res) => {
+    axios.get(apiUrl + '/downloads', {responseType: "json"})
+        .then(downloads => {
+            var downloadsArr = {
+                Statute: {},
+                Documents: [],
+                Others: []
+            }
+
+            downloads.data.forEach(elem => {
+                if(elem.LokaleDatei)
+                    elem.Link = apiUrl + elem.Link;
+
+                if(elem.Typ === 'Satzung')
+                    downloadsArr.Statute = elem;
+                else if(elem.Typ === 'Dokument')
+                    downloadsArr.Documents.push(elem);
+                else if(elem.Typ === 'Sonstiges')
+                    downloadsArr.Others.push(elem);
+            });
+
+            res.render('downloads', {active:{downloads:true}, downloads:downloadsArr});
+        })
+        .catch(err => {
+            console.log(err);
+        });
+});
 
 router.get('/datenschutz', (req, res) => {
     res.render('datenschutz', {data:data.data.data});
@@ -133,7 +159,7 @@ router.get('/kleiderboerse', (req, res) => {
             
             return e;
         });
-
+        https://berliner-fussball.de/der-bfv/service/amtliche-mitteilungen/
         page.data.Info = getSafeString(page.data.Info);
         
         res.render('boerse', {active:{boerse:true}, page:page.data, offerProducts:offerProductsArr, searchProducts:searchProducts.data});

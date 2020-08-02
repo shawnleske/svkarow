@@ -1,0 +1,16 @@
+.downloads-container {
+    > .flex-container {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+
+        > .flex-column {
+            margin: 0 20px;
+
+            > a.button {
+                display: block;
+                margin-bottom: 20px;
+            }
+        } //TODO: 320px view fix button arrow
+    }
+}
