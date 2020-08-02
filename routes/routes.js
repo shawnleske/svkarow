@@ -62,6 +62,17 @@ router.get('/verein', (req, res) => {
         axios.get(apiUrl + '/schiedsrichters', {responseType: "json"}),
         axios.get(apiUrl + '/teams', {responseType: "json"})
     ]).then(axios.spread((officials, referees, teams) => {
+        teams.data.sort((a, b) => {
+            if(a.index > b.index)
+                return 1;
+            else if(a.index < b.index)
+                return -1;
+            else
+                return 0;
+        });
+
+        console.log(teams.data);
+
         res.render('verein', {active:{verein:true}, officials:officials.data, referees:referees.data, teams:teams.data});
     })).catch(err => {
         console.log(err);
@@ -118,9 +129,9 @@ router.get('/team/:id', (req, res) =>  {
     
     axios.get(apiUrl + '/teams/' + teamId, {responseType: "json"})
         .then(team => {
-            team.data.Torschuetzen = Object.values(team.data.Torschuetzen);
-            
             if(team.data.Torschuetzen !== null || team.data.Torschuetzen === undefined) {
+                team.data.Torschuetzen = Object.values(team.data.Torschuetzen);
+
                 team.data.Torschuetzen.sort((a, b) => {
                     if(a.goals > b.goals)
                         return -1;
