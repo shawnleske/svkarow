@@ -46,44 +46,24 @@
 <div class="main-spacer"></div>
 <div class="news-container marginizer">
     <h2>NEWS</h2>
-    <div class="news">
-        <div class="date">7. Juni um 13:59</div>
-        <h3>Turniere / FS-Spiele (Nicht im DFB NET)</h3>
-        <div class="news-content marginizer">
-            <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
-        </div>
-    </div>
-    <div class="news">
-        <div class="date">7. Juni um 13:59</div>
-        <h3>Turniere / FS-Spiele (Nicht im DFB NET)</h3>
-        <div class="news-content marginizer">
-            <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
-        </div>
-    </div>
-    <div class="news">
-        <div class="date">7. Juni um 13:59</div>
-        <h3>Turniere / FS-Spiele (Nicht im DFB NET)</h3>
-        <div class="news-content marginizer">
-            <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
-        </div>
-    </div>
-    <div class="news">
-        <div class="date">7. Juni um 13:59</div>
-        <h3>Turniere / FS-Spiele (Nicht im DFB NET)</h3>
-        <div class="news-content marginizer">
-            <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
-        </div>
-    </div>
-    <div class="news">
-        <div class="date">7. Juni um 13:59</div>
-        <h3>Turniere / FS-Spiele (Nicht im DFB NET)</h3>
-        <div class="news-content marginizer">
-            <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
-        </div>
-    </div>
     <a href="/news" class="button">
         <div class="button-text">Mehr Nachrichten</div>
         <div class="button-arrow"></div>
     </a>
+    <div class="news-site-container">
+        {{#each news}}
+        <div class="news">
+            <div class="news-date">{{created_time}}</div>
+            {{#if picLink}}
+            <img class="news-image image-viewer" src="{{picLink}}" alt="news picture">
+            {{/if}}
+            <div class="news-content">{{messageHTML}}</div>
+            <a href="https://www.facebook.com/{{id}}" target="_blank" class="button">
+                <div class="button-text">Zum Facebook Post</div>
+                <div class="button-arrow"></div>
+            </a>
+        </div>
+        {{/each}}
+    </div>
 </div>
 {{/if}}

@@ -13,37 +13,6 @@ const formatter = new Intl.NumberFormat('de-DE', {
 
 const showdownConverter = new showdown.Converter();
 
-function getFbUrl(accessToken, siteId) {
-    return 'https://graph.facebook.com/v7.0/' + siteId + '/posts?access_token=' + accessToken;
-}
-
-function getSafeString(str) {
-    return new handlebars.SafeString(showdownConverter.makeHtml(str).replace(/<\/p>(\r\n|\n|\r)<p>/gm, '</p><p>').replace(/(\r\n|\n|\r)/gm, '<br>'));
-}
-
-function renderHome(req, res) {
-    axios.all([
-        axios.get(apiUrl + '/banner', {responseType: "json"}),
-        axios.get(apiUrl + '/home', {responseType: "json"})
-    ]).then(axios.spread((banner, page) => {
-        if(page.data.Spielertext !== undefined)
-            page.data.Spielertext = getSafeString(page.data.Spielertext);
-        
-        if(page.data.Trainertext !== undefined)
-            page.data.Trainertext = getSafeString(page.data.Trainertext);
-        
-        if(page.data.Schiedsrichtertext !== undefined)
-            page.data.Schiedsrichtertext = getSafeString(page.data.Schiedsrichtertext);
-        
-        if(page.data.Sponsorentext !== undefined)
-            page.data.Sponsorentext = getSafeString(page.data.Sponsorentext);
-
-        res.render('home', {active:{home:true}, banner:banner.data, page:page.data});
-    })).catch(err => {
-        console.log(err);
-    });
-}
-
 router.get('/', (req, res) => renderHome(req, res));
 router.get('/home', (req, res) => renderHome(req, res));
 
@@ -52,7 +21,22 @@ router.get('/news', (req, res) => {
         .then(page => {
             axios.get(getFbUrl(page.data.FacebookToken, page.data.SeitenId))
                 .then(news => {
-                    res.render('news', {active:{news:true}, news:news.data.data, newsNum:page.data.AnzahlNewsProSeite});
+                    //Get only active posts with no only-link message
+                    let filteredObj = news.data.data.filter(e => e.message !== undefined && e.is_expired === false && e.is_hidden === false && !validURL(e.message));
+                    let newsObj = filteredObj.map(e => {
+                        var returnObj = {};
+
+                        returnObj.id = e.id;
+                        returnObj.created_time = getConvertedTime(e.created_time);
+                        returnObj.messageHTML = getSafeString(e.message);
+
+                        if(e.full_picture !== undefined)
+                            returnObj.picLink = e.full_picture;
+
+                        return returnObj;
+                    });
+                    
+                    res.render('news', {active:{news:true}, news:newsObj, newsNum:page.data.AnzahlNewsProSeite});
                 })
                 .catch(err => {
                     console.log(err);
@@ -146,6 +130,7 @@ router.get('/shop', (req, res) => {
         console.log(err);
     });
 });
+
 router.get('/galerie', (req, res) => res.render('gallery', {active:{galerie:true}}));
 
 router.get('/kleiderboerse', (req, res) => {
@@ -159,7 +144,6 @@ router.get('/kleiderboerse', (req, res) => {
             
             return e;
         });
-        https://berliner-fussball.de/der-bfv/service/amtliche-mitteilungen/
         page.data.Info = getSafeString(page.data.Info);
         
         res.render('boerse', {active:{boerse:true}, page:page.data, offerProducts:offerProductsArr, searchProducts:searchProducts.data});
@@ -207,5 +191,90 @@ router.get('/team/:id', (req, res) =>  {
             console.log(err);
         });
 });
+
+function getFbUrl(accessToken, siteId) {
+    return 'https://graph.facebook.com/v7.0/' + siteId + '/posts?access_token=' + accessToken + '&fields=id,created_time,full_picture,is_expired,is_hidden,message&date_format=U';
+}
+
+function getSafeString(str) {
+    return new handlebars.SafeString(showdownConverter.makeHtml(str).replace(/<\/p>(\r\n|\n|\r)<p>/gm, '</p><p>').replace(/(\r\n|\n|\r)/gm, '<br>'));
+}
+
+function getConvertedTime(unixDate) {
+    let date = new Date(unixDate * 1000);
+    let timeStr = '';
+
+    if(date.getDate() < 10)
+        timeStr += '0';
+
+    timeStr += date.getDate() + '.';
+
+    if(date.getMonth() < 10)
+        timeStr += '0';
+
+    timeStr += date.getMonth() + '.' + date.getFullYear() + ' ' + date.getHours() + ':';
+
+    if(date.getMinutes() < 10)
+        timeStr += '0';
+    
+    timeStr += date.getMinutes();
+
+    return timeStr;
+}
+
+function validURL(str) {
+    var pattern = new RegExp('^(https?:\\/\\/)?'+ // protocol
+      '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|'+ // domain name
+      '((\\d{1,3}\\.){3}\\d{1,3}))'+ // OR ip (v4) address
+      '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*'+ // port and path
+      '(\\?[;&a-z\\d%_.~+=-]*)?'+ // query string
+      '(\\#[-a-z\\d_]*)?$','i'); // fragment locator
+    return !!pattern.test(str);
+}
+
+function renderHome(req, res) {
+    axios.all([
+        axios.get(apiUrl + '/banner', {responseType: "json"}),
+        axios.get(apiUrl + '/home', {responseType: "json"}),
+        axios.get(apiUrl + '/news-seite', {responseType: "json"})
+    ]).then(axios.spread((banner, page, newsPage) => {
+        axios.get(getFbUrl(newsPage.data.FacebookToken, newsPage.data.SeitenId))
+            .then(news => {
+                //Get only active posts with no only-link message
+                let filteredObj = news.data.data.filter(e => e.message !== undefined && e.is_expired === false && e.is_hidden === false && !validURL(e.message));
+                let newsObj = filteredObj.slice(0, page.data.NewsAnzahl).map(e => {
+                    var returnObj = {};
+
+                    returnObj.id = e.id;
+                    returnObj.created_time = getConvertedTime(e.created_time);
+                    returnObj.messageHTML = getSafeString(e.message);
+
+                    if(e.full_picture !== undefined)
+                        returnObj.picLink = e.full_picture;
+
+                    return returnObj;
+                });
+
+                if(page.data.Spielertext !== undefined)
+                    page.data.Spielertext = getSafeString(page.data.Spielertext);
+                
+                if(page.data.Trainertext !== undefined)
+                    page.data.Trainertext = getSafeString(page.data.Trainertext);
+                
+                if(page.data.Schiedsrichtertext !== undefined)
+                    page.data.Schiedsrichtertext = getSafeString(page.data.Schiedsrichtertext);
+                
+                if(page.data.Sponsorentext !== undefined)
+                    page.data.Sponsorentext = getSafeString(page.data.Sponsorentext);
+
+                res.render('home', {active:{home:true}, banner:banner.data, page:page.data, news:newsObj});
+            })
+            .catch(err => {
+                console.log(err);
+            });
+    })).catch(err => {
+        console.log(err);
+    });
+}
 
 module.exports = router;

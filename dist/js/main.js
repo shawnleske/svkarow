@@ -1,6 +1,5 @@
 $(() => {
     initMenu();
-    initNews();
     initSlick();
     initBanner();
     initViewer();
@@ -75,23 +74,6 @@ function createCarousel($this) {
             nextArrow: $carouselMovement.find($('.carousel-next-arrow')),
             appendDots: $carouselMovement.find($('.carousel-dots'))
         });
-}
-
-function initNews() {
-    if(!$('.news').length)
-        return;
-
-    $('.news').click(function() {
-        $this = $(this);
-        
-        $this.toggleClass('open');
-
-        if($this.hasClass('open')) 
-            setTimeout(() => {$this.children('.news-content').slideDown(250)}, 250);
-        else
-            $this.children('.news-content').slideUp(250);
-
-    });
 }
 
 function initMenu() {

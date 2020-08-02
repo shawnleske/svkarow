@@ -1,13 +1,19 @@
 <div class="container" data-news-per-page="{{newsNum}}">
     <h2>NEWS</h2>
     <!-- TODO: Paginator -->
-    {{#each news}}
-    <div class="news">
-        <div class="date">{{created_time}}</div>
-        <h3>Turniere / FS-Spiele (Nicht im DFB NET)</h3>
-        <div class="news-content marginizer">
-            <p>{{message}}</p>
+    <div class="news-site-container">
+        {{#each news}}
+        <div class="news">
+            <div class="news-date">{{created_time}}</div>
+            {{#if picLink}}
+            <img class="news-image image-viewer" src="{{picLink}}" alt="news picture">
+            {{/if}}
+            <div class="news-content">{{messageHTML}}</div>
+            <a href="https://www.facebook.com/{{id}}" target="_blank" class="button">
+                <div class="button-text">Zum Facebook Post</div>
+                <div class="button-arrow"></div>
+            </a>
         </div>
+        {{/each}}
     </div>
-    {{/each}}
 </div>
