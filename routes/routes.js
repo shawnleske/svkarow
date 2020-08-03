@@ -193,7 +193,6 @@ router.get('/team/:id', (req, res) =>  {
 
             if(team.data.WidgetHTML) {
                 team.data.WidgetHTML = getSafeString(team.data.WidgetHTML);
-                console.log(team.data.WidgetHTML);
             }
 
             res.render('team', {active:{verein:true}, data: team.data});
