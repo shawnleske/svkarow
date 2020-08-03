@@ -94,8 +94,6 @@ router.get('/verein', (req, res) => {
                 return 0;
         });
 
-        console.log(teams.data);
-
         res.render('verein', {active:{verein:true}, officials:officials.data, referees:referees.data, teams:teams.data});
     })).catch(err => {
         console.log(err);

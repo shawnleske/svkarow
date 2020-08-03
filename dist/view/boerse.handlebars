@@ -23,7 +23,7 @@
         </div>
         {{/each}}
         {{#unless offerProducts}}
-        <!-- TODO: Default when no entries -->
+            <div class="empty-entry"><p>Zurzeit bietet niemand ein Produkt zum Verkauf an!</p></div>
         {{/unless}}
     </div>
     <h3>Suche</h3>
@@ -36,7 +36,7 @@
         </div>
         {{/each}}
         {{#unless searchProducts}}
-            <div class="buy-empty"><p>Zurzeit befindet sich niemand auf der Suche nach einem Produkt!</p></div>
+            <div class="empty-entry"><p>Zurzeit befindet sich niemand auf der Suche nach einem Produkt!</p></div>
         {{/unless}}
     </div>
     <!-- TODO: paginator 5 entries -->

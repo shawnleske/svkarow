@@ -20,7 +20,7 @@
             </div>
             {{/each}}
             {{#unless officials}}
-            <!-- TODO: Default when no entries -->
+                <div class="empty-entry"><p>Es wurden keine Funktionäre gefunden!</p></div>
             {{/unless}}
         </div>
     </div>
@@ -43,11 +43,10 @@
             </div>
             {{/each}}
             {{#unless referees}}
-            <!-- TODO: Default when no entries -->
+                <div class="empty-entry"><p>Zurzeit sind keine Schiedsrichter Mitglieder des Vereins!</p></div>
             {{/unless}}
         </div>
     </div>
-    <!-- TODO: change all buttons to just a tag (button text between a-tags and arrow as ::after) -->
     <a target="_blank" href="https://berliner-fussball.de/spielbetrieb/schiedsrichter/schiedsrichter-werbekampagne/" class="button">
         <div class="button-text">Werde Schiedsrichter</div>
         <div class="button-arrow"></div>
@@ -69,7 +68,7 @@
         </div>
         {{/each}}
         {{#unless teams}}
-        <!-- TODO: Default when no entries -->
+            <div class="empty-entry"><p>Es wurden keine Teams gefunden!</p></div>
         {{/unless}}
     </div>
 </div>

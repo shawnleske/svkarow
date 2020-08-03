@@ -17,8 +17,8 @@
                 </div>
             </div>
             {{/each}}
-            {{#unless teams}}
-            <!-- TODO: Default when no entries -->
+            {{#unless data.Trainers}}
+                <div class="empty-entry"><p>Es wurden keine Trainer zu diesem Team gefunden!</p></div>
             {{/unless}}
         </div>
     </div>
@@ -62,12 +62,11 @@
         </table>
     </div>
     {{/if}}
+    {{log data}}
     <div class="games-table-widget">
         <h3>Tabelle + Spiele</h3>
         <div id="widget"></div>
         <!-- TODO: replace widget with html of data obj -->
-	    <script type="text/javascript">
-		    new fussballdeWidgetAPI().showWidget('widget', '02B9OLEEMC000000VUM1DNPHVVV7DK6U');
-	    </script>
+	    
     </div>
 </div>

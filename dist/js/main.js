@@ -4,6 +4,22 @@ $(() => {
     initBanner();
     initViewer();
     initNews();
+
+    let $buttonArrows = $('a.button .button-arrow');
+    
+    if($buttonArrows.length) {
+        $buttonArrows.each(function (){
+            $(this).css('top', $(this).css('top'));
+        });
+        
+        $(window).resize(function() {
+            $buttonArrows.each(function (){
+                $(this).css('top', $(this).parent().height() / 2);
+            });
+        });
+    }
+
+    
 });
 
 (($) => {
@@ -46,7 +62,7 @@ function initSlick() {
         var $carouselElems = $(this).children();
 
         // ONLY CREATE CAROUSEL WHEN MORE WIDTH THEN SCREEN
-        // TODO: BEWARE: Doesn't really work when children have different widths as it only checks the 1st elem
+        //BEWARE: Doesn't really work when children have different widths as it only checks the 1st elem
         if($carouselElems.outerWidth(true)*$carouselElems.length >= $(this).parent().width()) {
             createCarousel($(this));
         }
@@ -57,7 +73,7 @@ function initSlick() {
             var $this = $(this);
             var $carouselElems = $this.hasClass('slick-initialized') ? $this.find('.slick-slide') : $this.children();
 
-            // TODO: BEWARE: Doesn't really work when children have different widths as it only checks the 1st elem
+            //BEWARE: Doesn't really work when children have different widths as it only checks the 1st elem
             if($carouselElems.outerWidth(true)*$carouselElems.length >= $this.parent().width() && !$this.hasClass('slick-initialized')) {
                 createCarousel($this);
             }
