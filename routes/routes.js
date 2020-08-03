@@ -129,7 +129,14 @@ router.get('/shop', (req, res) => {
     });
 });
 
-router.get('/galerie', (req, res) => res.render('gallery', {active:{galerie:true}}));
+router.get('/galerie', (req, res) => {
+    axios.get(apiUrl + '/galerie', {responseType: "json"})
+        .then(page => {
+            res.render('gallery', {page:page.data, active:{galerie:true}});
+        }).catch(err => {
+            console.log(err);
+        });
+});
 
 router.get('/kleiderboerse', (req, res) => {
     axios.all([
@@ -155,7 +162,7 @@ router.get('/team/:id', (req, res) =>  {
     
     axios.get(apiUrl + '/teams/' + teamId, {responseType: "json"})
         .then(team => {
-            if(team.data.Torschuetzen !== null || team.data.Torschuetzen === undefined) {
+            if(team.data.Torschuetzen) {
                 team.data.Torschuetzen = Object.values(team.data.Torschuetzen);
 
                 team.data.Torschuetzen.sort((a, b) => {
@@ -183,6 +190,12 @@ router.get('/team/:id', (req, res) =>  {
                     }
                 });
             }
+
+            if(team.data.WidgetHTML) {
+                team.data.WidgetHTML = getSafeString(team.data.WidgetHTML);
+                console.log(team.data.WidgetHTML);
+            }
+
             res.render('team', {active:{verein:true}, data: team.data});
         })
         .catch(err => {

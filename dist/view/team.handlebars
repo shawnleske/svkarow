@@ -62,11 +62,11 @@
         </table>
     </div>
     {{/if}}
-    {{log data}}
+    {{#if data.WidgetHTML}}
     <div class="games-table-widget">
         <h3>Tabelle + Spiele</h3>
         <div id="widget"></div>
-        <!-- TODO: replace widget with html of data obj -->
-	    
+	    {{data.WidgetHTML}}
     </div>
+    {{/if}}
 </div>
