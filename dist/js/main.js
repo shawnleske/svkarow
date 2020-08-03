@@ -3,7 +3,27 @@ $(() => {
     initSlick();
     initBanner();
     initViewer();
+    initNews();
 });
+
+(($) => {
+    $.fn.pagination = function(options) {
+        console.log('function called');
+        
+        return this;
+    }; 
+})( jQuery );
+
+function initNews() {
+    $news = $('.container[data-news-per-page] .news');
+    
+    if(!$news.length)
+        return;
+
+        console.log($news);
+
+    $('.pagination').pagination({})
+}
 
 function initViewer() {
     $elems = $('.image-viewer');

@@ -212,12 +212,12 @@ function getConvertedTime(unixDate) {
     if(date.getMonth() < 10)
         timeStr += '0';
 
-    timeStr += date.getMonth() + '.' + date.getFullYear() + ' ' + date.getHours() + ':';
+    timeStr += (date.getMonth()+1) + '.' + date.getFullYear() + ' um ' + date.getHours() + ':';
 
     if(date.getMinutes() < 10)
         timeStr += '0';
     
-    timeStr += date.getMinutes();
+    timeStr += date.getMinutes() + ' Uhr';
 
     return timeStr;
 }

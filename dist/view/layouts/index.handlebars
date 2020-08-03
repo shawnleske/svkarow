@@ -12,7 +12,6 @@
     <link rel="stylesheet" href="/css/viewer.min.css" />
     <link rel="stylesheet" href="/css/main.min.css" />
     <script src="/js/lib/jquery-3.3.1.min.js"></script>
-    <script src="/js/lib/pagination.min.js"></script>
     <script src="/js/lib/slick.min.js"></script>
     <script src="/js/lib/viewer.min.js"></script>
     <script src="/js/lib/jquery-viewer.min.js"></script>
@@ -47,7 +46,7 @@
       <div class="sponsors">
         <div class="sponsors-container">
           {{#each (sponsors)}}
-          {{#if Link}}<a href="{{Link}}">{{/if}}<img src="{{apiUrl}}{{Bild.url}}" alt="{{Bild.alternativeText}}">{{#if Link}}</a>{{/if}}
+          {{#if Link}}<a target="_blank" href="{{Link}}">{{/if}}<img src="{{apiUrl}}{{Bild.url}}" alt="{{Bild.alternativeText}}">{{#if Link}}</a>{{/if}}
           {{/each}}
         </div>
       </div>
