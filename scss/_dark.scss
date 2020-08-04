@@ -1,0 +1,143 @@
+@if ($dark-mode) {
+    @if($dark-dark-mode) {
+        header {
+            > .header-bar {
+                > a {
+                    > .club-name {
+                        text-shadow: none;
+                    }
+                }
+            }
+        }
+    
+        footer {
+            > .footer-infos{
+                > .footer-menu {
+                    > li {
+                        > a {
+                            &:hover {
+                                color: $neutral-color;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    } @else {
+        header {
+            > .header-bar {
+                @include set-background($secondary-color);
+                border-bottom: 2px $dark-neutral-color solid;
+    
+                > a {
+                    > .club-name {
+                        text-shadow: 
+                        1px 1px 0px $primary-color,
+                        1px -1px 0px $primary-color,
+                        -1px 1px 0px $primary-color,
+                        -1px -1px 0px $primary-color;
+                    }
+                }
+            
+                > .nav-button {
+                    @include set-background($secondary-color);
+                }
+            }
+    
+            > nav {
+                > ul {
+                    > li {
+                        > a {
+                            border-bottom: 2px $dark-neutral-color solid;
+                            @include set-background($secondary-color, 0.85);
+                            color: $dark-neutral-color;
+                        }
+    
+                        &:hover > a, &.active > a{
+                            @include set-background($secondary-color, 1);
+                        }
+                    }
+                }
+            }
+        }
+    
+        footer {
+            a {
+                color: $dark-neutral-color;
+    
+                &:hover {
+                    color: $neutral-color;
+                }
+            }
+    
+            > .footer-infos{
+                @include set-background($secondary-color);
+    
+                &::before {
+                    @include set-background($dark-neutral-color);
+                }
+    
+                > .footer-menu {
+                    > li {
+                        > a {
+                            color: $dark-neutral-color;
+    
+                            &:hover {
+                                color: $neutral-color;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    a.button {
+        &:hover {
+            background-color: $secondary-color;
+            color: $neutral-color;
+        }
+    }
+
+    .carousel-prev-arrow,
+    .carousel-next-arrow
+    {
+        &:hover {
+            background-color: $secondary-color;
+            color: $neutral-color;
+        }
+    }
+
+    .banner {
+        > .banner-arrows {
+            > .banner-arrow {
+                background: $secondary-color;
+            }
+        }
+
+        > .banner-dots {
+            .slick-dots li button
+            {
+                background: $secondary-color;
+            }
+        }
+    }
+
+    .team-container {
+        > .training {
+            > .day {
+                > .time {
+                    &:empty {
+                        box-shadow: var(--inset-neumorph);
+                        background-image: linear-gradient( 45deg, 
+                            $primary-color 25%, $secondary-color 25%, 
+                            $secondary-color 50%, $primary-color 50%, 
+                            $primary-color 75%, $secondary-color 75%, 
+                            $secondary-color 100%);
+                        background-size: 40px 40px;
+                    }
+                }
+            }
+        }
+    }
+}

@@ -1,8 +1,18 @@
+$dark-mode: false;
+$dark-dark-mode: false;
+
 $font-stack: 'Roboto Condensed', sans-serif;
 $primary-color: #FA2E21;
 $secondary-color: #FFF72C;
 $neutral-color: #FFF;
 $dark-neutral-color: #2a2a2a;
+
+@if ($dark-mode) {
+  $primary-color: #2a2a2a;
+  $secondary-color: #FA2E21;
+  $neutral-color: #FFF;
+  $dark-neutral-color: #FFF72C;
+} 
 
 @function set-text-color($background-color) {
   @if (lightness($background-color) > 70) {
@@ -11,6 +21,13 @@ $dark-neutral-color: #2a2a2a;
     @return $neutral-color;
   }
 }
+
+@if ($dark-mode) {
+  $primary-color: #2a2a2a;
+  $secondary-color: #FA2E21;
+  $neutral-color: #FFF;
+  $dark-neutral-color: #FFF72C;
+} 
 
 @mixin set-background($color, $a: 1) {
   background-color: rgba($color, $a);
