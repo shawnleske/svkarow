@@ -133,6 +133,18 @@ function initMenu() {
             $nav.slideUp(250);
         }
     });
+    
+    $(window).resize(function() {
+        if(!$navButton.is(':visible') && !$nav.hasClass('active')) {
+            $navButton.addClass('open');
+            $nav.addClass('active')
+            $nav.slideDown(0);
+        } else if ($navButton.is(':visible') && $nav.hasClass('active')) {
+            $navButton.removeClass('open');
+            $nav.removeClass('active')
+            $nav.slideUp(0);
+        }
+    });
 }
 
 function initBanner() {
