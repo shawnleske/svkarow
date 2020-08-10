@@ -22,13 +22,6 @@ $dark-neutral-color: #2a2a2a;
   }
 }
 
-@if ($dark-mode) {
-  $primary-color: #2a2a2a;
-  $secondary-color: #FA2E21;
-  $neutral-color: #FFF;
-  $dark-neutral-color: #FFF72C;
-} 
-
 @mixin set-background($color, $a: 1) {
   background-color: rgba($color, $a);
   color: set-text-color($color);
