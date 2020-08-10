@@ -62,11 +62,11 @@
         </table>
     </div>
     {{/if}}
-    {{#if data.WidgetHTML}}
+    {{#if data.WidgetKey}}
     <div class="games-table-widget">
         <h3>Tabelle + Spiele</h3>
         <div id="widget"></div>
-	    {{data.WidgetHTML}}
+	    <script type="text/javascript">new fussballdeWidgetAPI().showWidget('widget','{{data.WidgetKey}}');</script>
     </div>
     {{/if}}
 </div>

@@ -40,6 +40,68 @@
         </div>
         {{/if}}
     </div>
+    <h3>Vereinsspielplan</h3>
+    <div class="club-widget">
+        <div id="widget"></div>
+	    <script type="text/javascript">new fussballdeWidgetAPI().showWidget('widget','02BMV8CDI0000000VUM1DNOKVT92PDQJ');</script>
+    </div>
+    <h3>Karow Kompakt</h3>
+    {{#if teams}}
+    <div class="teams-compact">
+        {{#each teams}}
+        <div class="team">
+            <div class="name">{{Name}}</div>
+            <div class="training">
+                {{#if Trainingszeiten.mo}}
+                <div class="day">
+                    <h4>Montag</h4>
+                    <div class="time">{{Trainingszeiten.mo}}</div>
+                </div>
+                {{/if}}
+                {{#if Trainingszeiten.di}}
+                <div class="day">
+                    <h4>Dienstag</h4>
+                    <div class="time">{{Trainingszeiten.di}}</div>
+                </div>
+                {{/if}}
+                {{#if Trainingszeiten.mi}}
+                <div class="day">
+                    <h4>Mittwoch</h4>
+                    <div class="time">{{Trainingszeiten.mi}}</div>
+                </div>
+                {{/if}}
+                {{#if Trainingszeiten.do}}
+                <div class="day">
+                    <h4>Donnerstag</h4>
+                    <div class="time">{{Trainingszeiten.do}}</div>
+                </div>
+                {{/if}}
+                {{#if Trainingszeiten.fr}}
+                <div class="day">
+                    <h4>Freitag</h4>
+                    <div class="time">{{Trainingszeiten.fr}}</div>
+                </div>
+                {{/if}}
+            </div>
+            {{#if Trainers}}
+            <div class="info">
+                {{#if Jahrgang}}Jahrgang: {{Jahrgang}}<br><br>{{/if}}
+                {{#each Trainers}}
+                    {{#if (isMainTrainer Sorte)}}
+                        Ansprechpartner: {{Name}}<br>
+                        Tel.: {{Tel}}
+                    {{/if}}
+                {{/each}}
+            </div>
+            {{/if}}
+            <a href="/team/{{_id}}" class="button">
+                <div class="button-text">Zum Team</div>
+                <div class="button-arrow"></div>
+            </a>
+        </div>
+        {{/each}}
+    </div>
+    {{/if}}
 </div>
 {{#if page.NewsAnzeige}}
 <div class="main-spacer"></div>
@@ -57,10 +119,10 @@
             <img class="news-image image-viewer" src="{{picLink}}" alt="news picture">
             {{/if}}
             <div class="news-content">{{messageHTML}}</div>
-            <a href="https://www.facebook.com/{{id}}" target="_blank" class="button">
+            <!-- <a href="https://www.facebook.com/{{id}}" target="_blank" class="button">
                 <div class="button-text">Zum Facebook Post</div>
                 <div class="button-arrow"></div>
-            </a>
+            </a> -->
         </div>
         {{/each}}
     </div>

@@ -21,6 +21,13 @@
             }
         }
     }
+
+    .teams-compact {
+        > .team {
+            margin-left: 10px;
+            margin-right: 10px;
+        }
+    }
 }
 
 @media(min-width: 480px) {
@@ -73,6 +80,13 @@
         > .image-container {
             height: 600px;
         }
+    }
+}
+
+@media(min-width: 570px) {
+    #widget {
+        transform: none;
+        margin: 0;
     }
 }
 

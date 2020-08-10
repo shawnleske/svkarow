@@ -19,7 +19,8 @@ axios.all([
             apiUrl: () => apiUrl,
             sponsors: () => sponsors.data,
             contact: () => indexPage.data.Kontakt,
-            showMaps: () => indexPage.data.MapsAnzeigen
+            showMaps: () => indexPage.data.MapsAnzeigen,
+            isMainTrainer: (sorte) => sorte === 'Trainer' ? true : false
         };
     })).catch(err => {
         console.log(err);

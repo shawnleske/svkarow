@@ -162,38 +162,7 @@ router.get('/team/:id', (req, res) =>  {
     
     axios.get(apiUrl + '/teams/' + teamId, {responseType: "json"})
         .then(team => {
-            if(team.data.Torschuetzen) {
-                team.data.Torschuetzen = Object.values(team.data.Torschuetzen);
-
-                team.data.Torschuetzen.sort((a, b) => {
-                    if(a.goals > b.goals)
-                        return -1;
-                    else if(a.goals < b.goals)
-                        return 1;
-                    else
-                        return 0;
-                });
-        
-                let prevGoals = 0;
-                let prevPlace = 1;
-                team.data.Torschuetzen.forEach(scorer => {
-                    if(prevGoals === 0){
-                        prevGoals = scorer.goals;
-                        scorer.place = prevPlace + '.';
-                    }
-                    else if (prevGoals > scorer.goals){
-                        prevGoals = scorer.goals;
-                        scorer.place = ++prevPlace + '.';
-                    }
-                    else {
-                        scorer.place = '';
-                    }
-                });
-            }
-
-            if(team.data.WidgetHTML) {
-                team.data.WidgetHTML = getSafeString(team.data.WidgetHTML);
-            }
+            team.data = getTeamArray(team.data);
 
             res.render('team', {active:{verein:true}, data: team.data});
         })
@@ -201,6 +170,39 @@ router.get('/team/:id', (req, res) =>  {
             console.log(err);
         });
 });
+
+function getTeamArray(data) {
+    if(data.Torschuetzen) {
+        data.Torschuetzen = Object.values(data.Torschuetzen);
+
+        data.Torschuetzen.sort((a, b) => {
+            if(a.goals > b.goals)
+                return -1;
+            else if(a.goals < b.goals)
+                return 1;
+            else
+                return 0;
+        });
+
+        let prevGoals = 0;
+        let prevPlace = 1;
+        data.Torschuetzen.forEach(scorer => {
+            if(prevGoals === 0){
+                prevGoals = scorer.goals;
+                scorer.place = prevPlace + '.';
+            }
+            else if (prevGoals > scorer.goals){
+                prevGoals = scorer.goals;
+                scorer.place = ++prevPlace + '.';
+            }
+            else {
+                scorer.place = '';
+            }
+        });
+    }
+
+    return data;
+}
 
 function getFbUrl(accessToken, siteId) {
     return 'https://graph.facebook.com/v7.0/' + siteId + '/posts?access_token=' + accessToken + '&fields=id,created_time,full_picture,is_expired,is_hidden,message&date_format=U';
@@ -246,8 +248,9 @@ function renderHome(req, res) {
     axios.all([
         axios.get(apiUrl + '/banner', {responseType: "json"}),
         axios.get(apiUrl + '/home', {responseType: "json"}),
-        axios.get(apiUrl + '/news-seite', {responseType: "json"})
-    ]).then(axios.spread((banner, page, newsPage) => {
+        axios.get(apiUrl + '/news-seite', {responseType: "json"}),
+        axios.get(apiUrl + '/teams', {responseType: "json"}),
+    ]).then(axios.spread((banner, page, newsPage, teams) => {
         axios.get(getFbUrl(newsPage.data.FacebookToken, newsPage.data.SeitenId))
             .then(news => {
                 //Get only active posts with no only-link message
@@ -277,7 +280,16 @@ function renderHome(req, res) {
                 if(page.data.Sponsorentext !== undefined)
                     page.data.Sponsorentext = getSafeString(page.data.Sponsorentext);
 
-                res.render('home', {active:{home:true}, banner:banner.data, page:page.data, news:newsObj});
+                teams.data.sort((a, b) => {
+                    if(a.index > b.index)
+                        return 1;
+                    else if(a.index < b.index)
+                        return -1;
+                    else
+                        return 0;
+                });
+
+                res.render('home', {active:{home:true}, banner:banner.data, page:page.data, news:newsObj, teams:teams.data});
             })
             .catch(err => {
                 console.log(err);

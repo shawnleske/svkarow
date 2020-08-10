@@ -155,6 +155,7 @@
 
     > .home-boxes {
         margin-top: 50px;
+        margin-bottom: 50px;
         padding: 1px 0;
         
         > .home-box {
@@ -168,6 +169,50 @@
                 color: $secondary-color;
                 margin: 0;
             }
+        }
+    }
+}
+
+.club-widget {
+    margin-bottom: 50px;
+}
+
+.teams-compact {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 0 25px;
+
+    > .team {
+        margin-bottom: 75px;
+        width: 100%;
+        max-width: 350px;
+
+        > .training .day h4 {
+            margin: 10px 0;
+        }
+
+        > .name {
+            border-radius: 5px;
+            background: $primary-color;
+            text-transform: uppercase;
+            box-shadow: var(--outset-neumorph);
+            font-weight: normal;
+            padding: 10px 0;
+            margin: 10px 0;
+        }
+
+        > .info {
+            border-radius: 5px;
+            background: $primary-color;
+            box-shadow: var(--inset-neumorph);
+            font-weight: normal;
+            padding: 10px;
+            margin: 10px 0;
+        }
+
+        > a.button {
+            float: left;
         }
     }
 }
