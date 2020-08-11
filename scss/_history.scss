@@ -1,0 +1,31 @@
+.container {
+    > .timeline {
+        .entry-container {
+            > .entry {
+                width: 100%;
+                max-width: 350px;
+                margin: auto;
+                margin-bottom: 50px;
+
+                > .year {
+                    border-radius: 5px;
+                    background: $primary-color;
+                    text-transform: uppercase;
+                    box-shadow: var(--outset-neumorph);
+                    font-weight: normal;
+                    padding: 10px 0;
+                    margin: 10px 0;
+                }
+
+                > .content {
+                    border-radius: 5px;
+                    background: $primary-color;
+                    box-shadow: var(--inset-neumorph);
+                    font-weight: normal;
+                    padding: 10px;
+                    margin: 10px 0;
+                }
+            }
+        }
+    }
+}

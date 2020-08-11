@@ -47,6 +47,53 @@ router.get('/news', (req, res) => {
         });
 });
 
+//TODO: remove function as it is just for testing sort functions
+function shuffle(array) {
+    var currentIndex = array.length, temporaryValue, randomIndex;
+
+    // While there remain elements to shuffle...
+    while (0 !== currentIndex) {
+        // Pick a remaining element...
+        randomIndex = Math.floor(Math.random() * currentIndex);
+        currentIndex -= 1;
+
+        // And swap it with the current element.
+        temporaryValue = array[currentIndex];
+        array[currentIndex] = array[randomIndex];
+        array[randomIndex] = temporaryValue;
+    }
+
+    return array;
+}
+
+router.get('/geschichte', (req, res) => {
+    axios.get(apiUrl + '/geschichtsabschnitts', {responseType: "json"})
+        .then(entries => {
+            var historyEntries = entries.data.map(e => {
+                e.Inhalt = getSafeString(e.Inhalt);
+
+                return e;
+            });
+
+            historyEntries.sort((a, b) => {
+                if(a.Jahr.substring(0, 4) > b.Jahr.substring(0, 4))
+                    return 1;
+                else if(a.Jahr.substring(0, 4) < b.Jahr.substring(0, 4))
+                    return -1;
+                else if(a.Jahr.length > b.Jahr.length)
+                    return 1;
+                else if(a.Jahr.length < b.Jahr.length)
+                    return -1;
+                else
+                    return 0;
+            });
+
+            res.render('history', {active:{verein:true}, historyEntries:historyEntries});
+        }).catch(err => {
+            console.log(err);
+        });
+});
+
 router.get('/downloads', (req, res) => {
     axios.get(apiUrl + '/downloads', {responseType: "json"})
         .then(downloads => {
@@ -282,6 +329,9 @@ function renderHome(req, res) {
                 
                 if(page.data.Sponsorentext !== undefined)
                     page.data.Sponsorentext = getSafeString(page.data.Sponsorentext);
+                
+                if(page.data.Geschichtstext !== undefined)
+                    page.data.Geschichtstext = getSafeString(page.data.Geschichtstext);
 
                 teams.data.sort((a, b) => {
                     if(a.index > b.index)

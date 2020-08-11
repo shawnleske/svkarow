@@ -40,6 +40,16 @@
         </div>
         {{/if}}
     </div>
+    <h3>Vereinsgeschichte</h3>
+    {{#if page.Geschichtstext}}
+    <div class="history">
+        <div class="text">{{page.Geschichtstext}}</div>
+        <a href="/geschichte" class="button">
+            <div class="button-text">Zur Vereinsgeschichte</div>
+            <div class="button-arrow"></div>
+        </a>
+    </div>
+    {{/if}}
     <h3>Vereinsspielplan</h3>
     <div class="club-widget">
         <div id="widget"></div>

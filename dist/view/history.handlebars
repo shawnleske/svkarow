@@ -1,0 +1,14 @@
+<div class="history-container container">
+    <h2>Geschichte</h2>
+    <div class="timeline">
+        <div class="entry-container">
+            {{#each historyEntries}}
+            <div class="entry">
+                <div class="entry-point"></div>
+                <div class="year">{{Jahr}}</div>
+                <div class="content">{{Inhalt}}</div>
+            </div>
+            {{/each}}
+        </div>
+    </div>
+</div>

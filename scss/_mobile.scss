@@ -139,3 +139,216 @@
         }
     }
 }
+
+@media(min-width: 400px) {
+    .container {
+        > .timeline {
+            .entry-container {
+                &::before {
+                    right: 25px;
+                    position: absolute;
+                    display: block;
+                    content: '';
+                    height: calc(100% - 200px);
+                    width: 10px;
+                    box-shadow: var(--inset-neumorph);
+                }
+
+                > .entry {
+                    position: relative;
+                    left: auto;
+                    right: 0px;
+                    width: calc(100% - 105px);
+                    margin-left: 0;
+                    margin-right: 0;
+                    max-width: 700px;
+
+                    &:first-child {
+                        margin-top: 0;
+                    }
+
+                    > .entry-point {
+                        top: 18px;
+                        right: -100px;
+                        position: absolute;
+                        width: 75px;
+                        height: 5px;
+                        background-color: $secondary-color;
+                        box-shadow: var(--outset-neumorph);
+                        border-radius: 5px;
+                        border-top-right-radius: 0;
+                        border-bottom-right-radius: 0;
+
+                        &::before {
+                            top: -3px;
+                            right: -5px;
+                            position: absolute;
+                            display: block;
+                            content: '';
+                            height: 10px;
+                            width: 10px;
+                            box-shadow: var(--outset-neumorph);
+                            border-radius: 50%;
+                            background: $secondary-color
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media(min-width: 640px) {
+    .container {
+        > .timeline {
+            .entry-container {
+                &::before {
+                    left: calc(50% - 5px);
+                }
+
+                > .entry {
+                    left: -200px;
+                    margin-top: -100px;
+                    margin-left: auto;
+                    margin-right: auto;
+                    max-width: 200px;
+
+                    &:nth-of-type(even) {
+                        left: 200px;
+
+                        > .entry-point {
+                            left: -100px;
+                            border-radius: 5px;
+                            border-top-left-radius: 0;
+                            border-bottom-left-radius: 0;
+
+                            &::before {
+                                left: -5px;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media(min-width: 740px) {
+    .container {
+        > .timeline {
+            .entry-container {
+                > .entry {
+                    left: -225px;
+                    max-width: 250px;
+
+                    &:nth-of-type(even) {
+                        left: 225px;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media(min-width: 840px) {
+    .container {
+        > .timeline {
+            .entry-container {
+                > .entry {
+                    left: -250px;
+                    max-width: 300px;
+
+                    &:nth-of-type(even) {
+                        left: 250px;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media(min-width: 940px) {
+    .container {
+        > .timeline {
+            .entry-container {
+                > .entry {
+                    left: -275px;
+                    max-width: 350px;
+
+                    &:nth-of-type(even) {
+                        left: 275px;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media(min-width: 940px) {
+    .container {
+        > .timeline {
+            .entry-container {
+                &::before {
+                    left: calc(50% - 5px);
+                    position: absolute;
+                    display: block;
+                    content: '';
+                    height: calc(100% - 200px);
+                    width: 10px;
+                    box-shadow: var(--inset-neumorph);
+                }
+
+                > .entry {
+                    position: relative;
+                    left: -275px;
+                    margin-top: -100px;
+
+                    &:nth-of-type(even) {
+                        left: 275px;
+
+                        > .entry-point {
+                            left: -100px;
+                            border-radius: 5px;
+                            border-top-left-radius: 0;
+                            border-bottom-left-radius: 0;
+
+                            &::before {
+                                left: -5px;
+                            }
+                        }
+                    }
+
+                    &:first-child {
+                        margin-top: 0;
+                    }
+
+                    > .entry-point {
+                        top: 18px;
+                        right: -100px;
+                        position: absolute;
+                        width: 75px;
+                        height: 5px;
+                        background-color: $secondary-color;
+                        box-shadow: var(--outset-neumorph);
+                        border-radius: 5px;
+                        border-top-right-radius: 0;
+                        border-bottom-right-radius: 0;
+
+                        &::before {
+                            top: -3px;
+                            right: -5px;
+                            position: absolute;
+                            display: block;
+                            content: '';
+                            height: 10px;
+                            width: 10px;
+                            box-shadow: var(--outset-neumorph);
+                            border-radius: 50%;
+                            background: $secondary-color
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

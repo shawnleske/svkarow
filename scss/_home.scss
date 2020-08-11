@@ -171,6 +171,14 @@
             }
         }
     }
+
+    > .history {
+        margin-bottom: 50px;
+
+        > .text {
+            margin-bottom: 25px;
+        }
+    }
 }
 
 .club-widget {
@@ -185,7 +193,7 @@
 
     > .team {
         margin-bottom: 75px;
-        width: 100%;
+        width: max-content;
         max-width: 350px;
 
         > .training .day h4 {
