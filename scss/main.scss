@@ -408,6 +408,18 @@ footer {
     }
 }
 
+.datenschutz-container {
+    > h3 {
+        margin-top: 50px;
+        margin-bottom: 35px;
+    }
+
+    > h4 {
+        margin-top: 50px;
+        margin-bottom: 25px;
+    }
+}
+
 @import 'mobile';
 
 @import 'dark';

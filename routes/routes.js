@@ -123,7 +123,14 @@ router.get('/downloads', (req, res) => {
 });
 
 router.get('/datenschutz', (req, res) => {
-    res.render('datenschutz', {data:data.data.data});
+    axios.get(apiUrl + '/datenschutz', {responseType: "json"})
+        .then(page => {
+            page.data.Verantwortlicher = getSafeString(page.data.Verantwortlicher);
+
+            res.render('datenschutz', {page:page.data});
+        }).catch(err => {
+            console.log(err);
+        });
 });
 
 router.get('/verein', (req, res) => {
