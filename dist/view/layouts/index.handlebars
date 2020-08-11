@@ -46,7 +46,7 @@
       <div class="sponsors">
         <div class="sponsors-container">
           {{#each (sponsors)}}
-          {{#if Link}}<a target="_blank" href="{{Link}}">{{/if}}<img src="{{apiUrl}}{{Bild.url}}" alt="{{Bild.alternativeText}}">{{#if Link}}</a>{{/if}}
+          {{#if Link}}<a target="_blank" rel="noopener" href="{{Link}}">{{/if}}<img src="{{apiUrl}}{{Bild.url}}" alt="{{Bild.alternativeText}}">{{#if Link}}</a>{{/if}}
           {{/each}}
         </div>
       </div>

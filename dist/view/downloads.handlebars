@@ -4,7 +4,7 @@
         {{#if downloads.Statute}}
         <div class="flex-column statute">
             <h3>Satzung</h3>
-            <a href="{{downloads.Statute.Link}}" class="button" target="_blank">
+            <a href="{{downloads.Statute.Link}}" class="button" rel="noopener" target="_blank">
                 <div class="button-text">{{downloads.Statute.Titel}}</div>
                 <div class="button-arrow"></div>
             </a>
@@ -14,7 +14,7 @@
         <div class="flex-column documents">
             <h3>Dokumente</h3>
             {{#each downloads.Documents}}
-            <a href="{{Link}}" class="button" target="_blank">
+            <a href="{{Link}}" class="button" rel="noopener" target="_blank">
                 <div class="button-text">{{Titel}}</div>
                 <div class="button-arrow"></div>
             </a>
@@ -25,7 +25,7 @@
         <div class="flex-column others">
             <h3>Sonstiges</h3>
             {{#each downloads.Others}}
-            <a href="{{Link}}" class="button" target="_blank">
+            <a href="{{Link}}" class="button" rel="noopener" target="_blank">
                 <div class="button-text">{{Titel}}</div>
                 <div class="button-arrow"></div>
             </a>
