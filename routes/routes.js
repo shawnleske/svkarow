@@ -98,7 +98,7 @@ router.get('/downloads', (req, res) => {
     axios.get(apiUrl + '/downloads', {responseType: "json"})
         .then(downloads => {
             var downloadsArr = {
-                Statute: {},
+                Statute: null,
                 Documents: [],
                 Others: []
             }
