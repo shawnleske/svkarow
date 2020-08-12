@@ -1,8 +1,34 @@
 .gallery-container {
     > .image-container {
-        > img {
-            max-height: 200px;
-            max-width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+
+        > .image {
+            max-width: 250px;
+            margin: 0 25px;
+            margin-bottom: 50px;
+
+            > img {
+                // max-height: 200px;
+                // max-width: 100%;
+    
+                height: 350px;
+                width: 250px;
+                object-fit: cover;
+                margin: 0;
+                box-shadow: var(--outset-neumorph);
+                margin-top: 20px;
+                border-radius: 5px;
+            }
+    
+            > .desc {
+                padding: 10px 25px;
+                border-radius: 5px;
+                background: $primary-color;
+                box-shadow: var(--inset-neumorph);
+                margin-top: 20px;
+            }
         }
     }
 }

@@ -46,14 +46,17 @@
                 }
 
                 > img {
+                    width: 115px;
+                    height: 350px;
+                    object-fit: cover;
                     border-radius: 5px;
-                    width: calc(50% - 10px);
                     margin: 0;
                     box-shadow: var(--outset-neumorph);
                     margin-top: 20px;
 
                     &:nth-child(odd) {
                         float: left;
+                        margin-right: 20px;
                     }
 
                     &:nth-child(even) {
@@ -64,16 +67,43 @@
                         margin-top: 0;
                     }
                 }
+
+                // > img {
+                //     border-radius: 5px;
+                //     width: calc(50% - 10px);
+                //     margin: 0;
+                //     box-shadow: var(--outset-neumorph);
+                //     margin-top: 20px;
+
+                //     &:nth-child(odd) {
+                //         float: left;
+                //     }
+
+                //     &:nth-child(even) {
+                //         float: right;
+                //     }
+
+                //     &:nth-child(1), &:nth-child(2) {
+                //         margin-top: 0;
+                //     }
+                // }
             }
 
-            > .image-container.horizontal, > .image-container.single {
-                > img {
-                    width: 100%;
-                    float: none;
+            // > .image-container.horizontal, > .image-container.single {
+            //     > img {
+            //         width: 100%;
+            //         float: none;
 
-                    &:nth-child(2) {
-                        margin-top: 20px;
-                    }
+            //         &:nth-child(2) {
+            //             margin-top: 20px;
+            //         }
+            //     }
+            // }
+
+            > .image-container.single {
+                > img {
+                    width: 250px;
+                    float: none;
                 }
             }
     
@@ -102,7 +132,8 @@
                     font-weight: normal;
                     padding: 10px 0;
                     margin: 20px 0 0 0;
-                    width: calc(50% - 10px);
+                    //width: calc(50% - 10px);
+                    width: 100%;
                     float: right;
                     font-size: 1.7em;
                     padding: 5px 0;

@@ -2,7 +2,10 @@
     <h2>Galerie</h2>
     <div class="image-container image-viewer">
         {{#each page.Bilder}}
-        <img src="{{apiUrl}}{{url}}" alt="{{alternativeText}}" class="gallery-pic">
+        <div class="image">
+            <img src="{{apiUrl}}{{url}}" alt="{{alternativeText}}" class="gallery-pic">
+            {{#if caption}}<div class="desc">{{caption}}</div>{{/if}}
+        </div>
         {{/each}}
     </div>
 </div>
