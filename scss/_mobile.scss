@@ -128,11 +128,21 @@
                         font-weight: bold;
                         height: 60px;
                         line-height: 60px;
+
+                        &::after {
+                            content: "";
+                            display: block;
+                            bottom: 15px;
+                            width: 0;
+                            height: 2px;
+                            background: $neutral-color;
+                            position: relative;
+                            transition: width 0.25s;
+                        }
                     }
     
-                    &:hover > a, &.active > a{
-                        background: none;
-                        color: $neutral-color;
+                    &:hover > a::after, &.active > a::after {
+                        width: 100%;
                     }
                 }
             }

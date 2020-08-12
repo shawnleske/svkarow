@@ -127,7 +127,7 @@ function initMenu() {
     });
 
     $('body').click(e => {
-        if(!$(e.target).is($navButton) && !$(e.target).closest($navButton).length && $nav.hasClass('active')) {
+        if($navButton.is(':visible') && !$(e.target).is($navButton) && !$(e.target).closest($navButton).length && $nav.hasClass('active')) {
             $navButton.removeClass('open');
             $nav.removeClass('active');
             $nav.slideUp(250);

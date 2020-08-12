@@ -282,13 +282,13 @@ header {
                     text-transform: uppercase;
                     text-shadow: none !important;
                     @include font-size(1);
-                    color: $secondary-color;
-                    font-weight: bold;
+                    color: $neutral-color !important;
+                    font-weight: normal;
                     transition: background-color 0.25s, color 0.25s !important;
                 }
 
-                &:hover > a, &.active > a{
-                    @include set-background($primary-color, 1);
+                &:hover > a, &.active > a {
+                    font-weight: bold;
                 }
             }
         }
